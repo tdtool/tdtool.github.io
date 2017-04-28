@@ -50,7 +50,7 @@ module.exports = options => {
     config.plugins.templates = loadTemplate(options.template)
   }
   // clean
-  if (is.Boolean(optins.clean)) {
+  if (is.Boolean(options.clean)) {
     config.__CLEAN__ = optins.clean
   } else {
     config.__CLEAN__ = true
