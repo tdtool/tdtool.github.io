@@ -17,3 +17,4 @@ exports.Object = obj => type(obj) === '[object Object]'
 exports.Boolean = obj => type(obj) === '[object Boolean]'
 exports.Function = obj => type(obj) === '[object Function]'
 exports.nil = obj => obj === null || obj === undefined
+exports.valid = obj => !!obj

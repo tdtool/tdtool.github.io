@@ -31,6 +31,8 @@
     "babel-preset-stage-2": "^6.24.1"
   },
   "dependencies": {
+    "html-webpack-plugin": "^2.28.0",
+    "source-map-support": "^0.4.14",
     "webpack": "^2.4.1"
   }
 }

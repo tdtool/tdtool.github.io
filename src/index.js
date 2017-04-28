@@ -8,10 +8,14 @@
 import _set from 'lodash/set'
 import _unset from 'lodash/unset'
 
+import loadConfig from './util/load-config'
+
 exports.version = require('../package.json').version
 exports.webpackVersion = require('webpack/package.json').version
 
 class Config {
   constructor(options) {
+    this.config = loadConfig(options)
   }
 }
+exports.Config = Config
