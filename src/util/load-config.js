@@ -29,7 +29,7 @@ module.exports = options => {
       publicPath: is.nil(options.publicPath) ? PUBLIC_PATH : options.publicPath,
       libraryTarget: options.libraryTarget,
       library: options.moduleName,
-      umdNamedDefine: options.libraryTarget === 'umd' || optins.libraryTarget === 'amd'
+      umdNamedDefine: options.libraryTarget === 'umd' || options.libraryTarget === 'amd'
     },
     plugins: {},
     module: {
@@ -54,7 +54,7 @@ module.exports = options => {
   }
   // clean
   if (is.Boolean(options.clean)) {
-    config.__CLEAN__ = optins.clean
+    config.__CLEAN__ = options.clean
   } else {
     config.__CLEAN__ = true
   }
@@ -76,7 +76,7 @@ module.exports = options => {
   config.output.chunkFilename = options.chunkFilename || '[name].chunk.js'
   // minimize
   const UglifyJs = new webpack.optimize.UglifyJsPlugin({
-    sourceMap: Boolean(optins.sourceMap),
+    sourceMap: Boolean(options.sourceMap),
     comments: false,
     compress: {
       screw_ie8: true,
@@ -132,4 +132,6 @@ module.exports = options => {
   extractCss(options, config)
   // ProgressBarPlugin
   config.plugins.ProgressBar = new ProgressBarPlugin()
+  
+  return config
 }

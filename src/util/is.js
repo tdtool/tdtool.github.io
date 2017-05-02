@@ -5,10 +5,8 @@
  * @Last modified time: 2017-04-27 15:59:18
  */
 
-const toString = Object.prototype.toString()
-
 function type(obj) {
-  return toString.call(obj)
+  return Object.prototype.toString.call(obj)
 }
 
 exports.String = obj => type(obj) === '[object String]'

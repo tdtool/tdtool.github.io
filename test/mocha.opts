@@ -1,0 +1,4 @@
+--compilers js:babel-core/register
+--reporter mochawesome
+--timeout 30000
+--slow 2000
