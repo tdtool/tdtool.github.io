@@ -37,7 +37,7 @@ module.exports = options => {
     },
     devServer: {},
     resolve: {
-      modules: ['node_modules', path.resolve(process.cwd(), 'node_modules')].concat(options.modules)
+      modules: ['node_modules', path.resolve(process.cwd(), 'node_modules'), path.resolve(__dirname, '../../node_modules')].concat(options.modules)
     }
   }
   // node env
