@@ -27,7 +27,7 @@ module.exports = options => {
     output: {
       path: path.resolve(process.cwd(), options.dist || DIST),
       publicPath: is.nil(options.publicPath) ? PUBLIC_PATH : options.publicPath,
-      libraryTarget: options.libraryTarget,
+      libraryTarget: options.target === 'node' ? 'commonjs2' : options.libraryTarget,
       library: options.moduleName,
       umdNamedDefine: options.libraryTarget === 'umd' || options.libraryTarget === 'amd'
     },
@@ -95,10 +95,10 @@ module.exports = options => {
   })
   const UglifyCss = new webpack.LoaderOptionsPlugin({minimize: true})
   if (is.Object(options.minimize)) {
-    if (minimize.js) {
+    if (options.minimize.js) {
       config.plugins.UglifyJs = UglifyJs
     }
-    if (minimize.css) {
+    if (options.minimize.css) {
       config.plugins.LoaderOptions = UglifyCss
     }
   } else {
@@ -110,8 +110,8 @@ module.exports = options => {
   // sourceMap
   if (!!options.sourceMap) {
     config.plugins.SourceMapDevTool = new webpack.SourceMapDevToolPlugin({filename: '[file].map'})
-    config.devtool = options.sourceMap === true ? (options.devServer === 'node' ? 'cheap-module-source-map' : 'source-map'): options.sourceMap
-    if (options.devServer === 'node') {
+    config.devtool = options.sourceMap === true ? (options.target === 'node' ? 'cheap-module-source-map' : 'source-map'): options.sourceMap
+    if (options.target === 'node') {
       config.plugins.Banner = new webpack.BannerPlugin({
         banner: 'require("source-map-support").install();',
         raw: true,
@@ -132,6 +132,6 @@ module.exports = options => {
   extractCss(options, config)
   // ProgressBarPlugin
   config.plugins.ProgressBar = new ProgressBarPlugin()
-  
+
   return config
 }
