@@ -14,7 +14,7 @@ const expect = chai.expect
 describe("index", () => {
   it('test new config', () => {
     process.env.NODE_ENV = 'development'
-    const config = new Config({
+    const configObj = new Config({
       entry: 'test.js',
       extractCss: true,
       externals: {
@@ -28,7 +28,8 @@ describe("index", () => {
       urlLoaderLimit: 10000,
       clean: false,
       minimize: true
-    }).config
+    })
+    const config = configObj.config
     expect(config.entry).to.equal('test.js')
     expect(config.plugins.ExtractText.filename).to.equal('[name].css')
     expect(config.externals.jquery).to.equal('window.$')
@@ -41,6 +42,14 @@ describe("index", () => {
     expect(config.plugins.LoaderOptions).to.not.be.undefined
     expect(config.plugins.NoErrors).to.not.be.undefined
     expect(config.cache).to.equal(true)
+    configObj.add('plugin.test', 123)
+    expect(config.plugins.test).to.equal(123)
+    configObj.add('rule.sass', 234)
+    expect(config.module.rules.sass).to.equal(234)
+    configObj.add('test.test', 345)
+    expect(config.test.test).to.equal(345)
+    configObj.remove('test.test')
+    expect(config.test.test).to.be.undefined
   })
   it('test target node', () => {
     process.env.NODE_ENV = 'production'

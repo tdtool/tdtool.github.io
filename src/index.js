@@ -13,9 +13,29 @@ import loadConfig from './util/load-config'
 exports.version = require('../package.json').version
 exports.webpackVersion = require('webpack/package.json').version
 
+const replacePath = _path => {
+  if (/^(rule)s?/ig.test(_path)) {
+    return _path.replace(/^(rule)s?/ig, 'module.$1s')
+  }
+  if (/^(plugin)s?/g.test(_path)) {
+    return _path.replace(/^(plugin)s?/g, '$1s')
+  }
+  return _path
+}
+
 class Config {
   constructor(options) {
     this.config = loadConfig(options)
+  }
+
+  add(_path, value) {
+    _set(this.config, replacePath(_path), value)
+    return this;
+  }
+
+  remove(_path, value) {
+    _unset(this.config, replacePath(_path))
+    return this
   }
 }
 exports.Config = Config
