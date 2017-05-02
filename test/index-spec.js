@@ -12,7 +12,11 @@ const expect = chai.expect
 
 describe("index", () => {
   it('test new config', () => {
-    const config = new Config({})
-    console.log(config)
+    const config = new Config({
+      entry: 'test.js',
+      extractCss: true
+    }).config
+    expect(config.entry).to.equal('test.js')
+    expect(config.plugins.ExtractText.filename).to.equal('[name].css')
   })
 })

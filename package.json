@@ -11,7 +11,7 @@
     "build": "npm run clean && echo Using Babel && babel --version && babel src --out-dir lib -s",
     "test": "npm run build && mocha --recursive 'test/**/*-spec.js'",
     "test:report": "npm run test && open mochawesome-reports/mochawesome.html",
-    "coverage": "nyc --reporter=text --reporter=html --reporter==lcov mocha",
+    "coverage": "nyc --reporter=text --reporter=html --reporter=lcov mocha",
     "coverage:report": "npm run coverage && open coverage/index.html"
   },
   "babel": {
@@ -38,10 +38,12 @@
       ]
     },
     "include": [
-      "src/*.js"
+      "src/*.js",
+      "src/**/*.js"
     ],
     "exclude": [
-      "lib"
+      "lib",
+      "mochawesome-report"
     ],
     "extension": [
       ".js"
@@ -61,6 +63,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "chai": "^3.5.0",
+    "coveralls": "^2.13.1",
     "mocha": "^3.3.0",
     "mochawesome": "^2.1.0",
     "nyc": "^10.3.0",

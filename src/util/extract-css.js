@@ -47,27 +47,27 @@ export default function extractCss({ extractCss, target, sourceMap, minimize, po
     }
   }
   if (target === 'node') {
-    config.rules.push({
+    config.module.rules.less = {
       test: /\.less$/,
       use: [
         cssLoader,
         postcssLoader,
         lessLoader
       ]
-    })
-    config.rules.push({
+    }
+    config.module.rules.css = {
       test: /\.css$/,
       use: [
         cssLoader,
         postcssLoader
       ]
-    })
+    }
     return
   }
 
-  if (extractCss === true) {
-    config.plugins.ExtractText = new ExtractTextPlugin('[name].css')
-    config.rules.push({
+  if (!!extractCss) {
+    config.plugins.ExtractText = new ExtractTextPlugin(is.String(extractCss) ? extractCss : '[name].css')
+    config.module.rules.less = {
       test: /\.less$/,
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
@@ -77,8 +77,8 @@ export default function extractCss({ extractCss, target, sourceMap, minimize, po
           lessLoader
         ]
       })
-    })
-    config.rules.push({
+    }
+    config.module.rules.css = {
       test: /\.css$/,
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
@@ -87,9 +87,9 @@ export default function extractCss({ extractCss, target, sourceMap, minimize, po
           postcssLoader
         ]
       })
-    })
+    }
   } else {
-    config.rules.push({
+    config.module.rules.less = {
       test: /\.less$/,
       use: [
         'style-loader',
@@ -97,14 +97,14 @@ export default function extractCss({ extractCss, target, sourceMap, minimize, po
         postcssLoader,
         lessLoader
       ]
-    })
-    config.rules.push({
+    }
+    config.module.rules.css = {
       test: /\.css$/,
       use: [
         'style-loader',
         cssLoader,
         postcssLoader
       ]
-    })
+    }
   }
 }
