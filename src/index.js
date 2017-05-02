@@ -9,6 +9,7 @@ import _set from 'lodash/set'
 import _unset from 'lodash/unset'
 
 import loadConfig from './util/load-config'
+import loadExtend from './util/load-extend'
 
 exports.version = require('../package.json').version
 exports.webpackVersion = require('webpack/package.json').version
@@ -26,14 +27,16 @@ const replacePath = _path => {
 class Config {
   constructor(options) {
     this.config = loadConfig(options)
+    // load extends
+    loadExtend(options.extends, this)
   }
 
-  add(_path, value) {
+  add = (_path, value) => {
     _set(this.config, replacePath(_path), value)
     return this;
   }
 
-  remove(_path, value) {
+  remove = (_path, value) => {
     _unset(this.config, replacePath(_path))
     return this
   }
