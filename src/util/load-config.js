@@ -7,8 +7,10 @@
 
 import path from 'path'
 import webpack from 'webpack'
+import ProgressBarPlugin from 'progress-bar-webpack-plugin'
 
 import is from './is'
+import extractCss from './extract-css'
 import loadTemplate from './load-template'
 import { DIST, PUBLIC_PATH, URL_LOADER_LIMIT } from './constant'
 
@@ -21,6 +23,7 @@ import { DIST, PUBLIC_PATH, URL_LOADER_LIMIT } from './constant'
 module.exports = options => {
   const config = {
     entry: options.entry,
+    target: options.target,
     output: {
       path: path.resolve(process.cwd(), options.dist || DIST),
       publicPath: is.nil(options.publicPath) ? PUBLIC_PATH : options.publicPath,
@@ -119,5 +122,14 @@ module.exports = options => {
   // development
   if (process.env.NODE_ENV === 'development') {
     config.plugins.NoErrors = webpack.NoEmitOnErrorsPlugin ? new webpack.NoEmitOnErrorsPlugin() : new webpack.NoErrorsPlugin()
+    config.cache = true
   }
+  // development
+  if (process.env.NODE_ENV === 'production') {
+    config.bail = true
+  }
+  // extractCss
+  extractCss(options, config)
+  // ProgressBarPlugin
+  config.plugins.ProgressBar = new ProgressBarPlugin()
 }
