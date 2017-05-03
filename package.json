@@ -43,7 +43,8 @@
     ],
     "exclude": [
       "lib",
-      "mochawesome-report"
+      "mochawesome-report",
+      "node_modules"
     ],
     "extension": [
       ".js"

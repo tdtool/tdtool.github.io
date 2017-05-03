@@ -11,6 +11,7 @@ const version = require('../../package.json').version
 
 const prefix = `[tdtool@${version}]`
 const sep = chalk.gray('-')
+const isTest = process.env.NODE_ENV === 'test'
 
 /**
  * Log a `message` to the console
