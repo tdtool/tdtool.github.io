@@ -7,8 +7,28 @@
 
 import logger from './logger'
 import is from './is'
+import shell from 'shelljs'
+
+const installExtend = key => {
+  const packageName = `tdtool-${key}`
+  if (!is.pluginExists(packageName)) {
+    logger.warn(`Auto install ${packageName}`)
+    let stdout
+    if (shell.which('yarn')) {
+      stdout = shell.exec(`yarn add ${packageName} -D --silent`)
+    } else {
+      stdout = shell.exec(`npm install ${packageName} --save-dev --silent`)
+    }
+    if (stdout.code === 0) {
+      logger.success(`Success to install ${packageName}`)
+    } else {
+      logger.fatal(`Failed to auto install ${packageName}, please run 'npm i ${packageName} -D'`)
+    }
+  }
+}
 
 const importExtend = (extend, config, options) => {
+  installExtend(extend)
   require(`tdtool-${extend}`)(config, options)
   logger.success(`Loaded success: ${extend}`)
 }
@@ -23,10 +43,6 @@ module.exports = (_extends, config) => {
   if (is.Object(_extends)) {
     Object.keys(_extends || {}).forEach(key => {
       const options = is.Boolean(_extends[key]) ? null : _extends[key]
-      const packageName = `tdtool-${key}`
-      if (!is.pluginExists(packageName)) {
-        logger.fatal(`Please install ${packageName}, run 'npm i ${packageName} -D'`)
-      }
       importExtend(key, config, options)
     })
   } else if (is.Array(_extends)) {

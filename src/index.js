@@ -10,6 +10,7 @@ import _unset from 'lodash/unset'
 
 import loadConfig from './util/load-config'
 import loadExtend from './util/load-extend'
+import parse from './util/parse'
 
 exports.version = require('../package.json').version
 exports.webpackVersion = require('webpack/package.json').version
@@ -28,7 +29,10 @@ class Config {
   constructor(options) {
     this.config = loadConfig(options)
     // load extends
-    loadExtend(options.extends, this)
+    loadExtend(options.extends, {
+      add: this.add,
+      remove: this.remove
+    })
   }
 
   add = (_path, value) => {
@@ -39,6 +43,10 @@ class Config {
   remove = (_path, value) => {
     _unset(this.config, replacePath(_path))
     return this
+  }
+
+  resolve = () => {
+    return parse(this.config)
   }
 }
 exports.Config = Config

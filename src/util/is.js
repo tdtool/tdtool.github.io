@@ -12,6 +12,15 @@ function type(obj) {
   return Object.prototype.toString.call(obj)
 }
 
+function isInstalled(name) {
+  try {
+    require.resolve(name)
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
 exports.String = obj => type(obj) === '[object String]'
 exports.Array = obj => type(obj) === '[object Array]'
 exports.Object = obj => type(obj) === '[object Object]'
@@ -19,4 +28,5 @@ exports.Boolean = obj => type(obj) === '[object Boolean]'
 exports.Function = obj => type(obj) === '[object Function]'
 exports.nil = obj => obj === null || obj === undefined
 exports.valid = obj => !!obj
-exports.pluginExists = name => fs.existsSync(path.join(process.cwd(), 'node_modules', name))
+exports.pluginExists = name => isInstalled(name) || fs.existsSync(path.join(process.cwd(), 'node_modules', name))
+exports.installed = isInstalled

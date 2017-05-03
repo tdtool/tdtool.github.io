@@ -49,7 +49,14 @@ describe("index", () => {
     configObj.add('test.test', 345)
     expect(config.test.test).to.equal(345)
     configObj.remove('test.test')
+    configObj.remove('rule.sass')
+    configObj.remove('plugin.test')
     expect(config.test.test).to.be.undefined
+    expect(config.module.rules.sass).to.be.undefined
+    expect(config.plugins.test).to.be.undefined
+    const webpackConfig = configObj.resolve()
+    expect(webpackConfig.plugins.constructor.name).to.equal('Array')
+    expect(webpackConfig.module.rules.constructor.name).to.equal('Array')
   })
   it('test target node', () => {
     process.env.NODE_ENV = 'production'
