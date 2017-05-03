@@ -16,7 +16,6 @@ describe("index", () => {
     process.env.NODE_ENV = 'development'
     const configObj = new Config({
       entry: 'test.js',
-      extractCss: true,
       externals: {
         jquery: 'window.$'
       },
@@ -25,19 +24,16 @@ describe("index", () => {
       },
       template: true,
       sourceMap: true,
-      urlLoaderLimit: 10000,
       clean: false,
       minimize: true
     })
     const config = configObj.config
     expect(config.entry).to.equal('test.js')
-    expect(config.plugins.ExtractText.filename).to.equal('[name].css')
     expect(config.externals.jquery).to.equal('window.$')
     expect(config.resolve.alias.test).to.equal('./test.js')
     expect(config.plugins.templates['index.html']).to.not.be.undefined
     expect(config.devtool).to.equal('source-map')
     expect(config.__CLEAN__).to.equal(false)
-    expect(config.urlLoaderLimit).to.equal(10000)
     expect(config.plugins.UglifyJs).to.not.be.undefined
     expect(config.plugins.LoaderOptions).to.not.be.undefined
     expect(config.plugins.NoErrors).to.not.be.undefined
@@ -62,7 +58,6 @@ describe("index", () => {
     process.env.NODE_ENV = 'production'
     const config = new Config({
       entry: 'test.js',
-      extractCss: true,
       target: 'node',
       sourceMap: true,
       minimize: {
@@ -71,7 +66,6 @@ describe("index", () => {
       },
       template: 'index.tpl'
     }).config
-    expect(config.plugins.ExtractText).to.be.undefined
     expect(config.output.libraryTarget).to.equal('commonjs2')
     expect(config.devtool).to.equal('cheap-module-source-map')
     expect(config.plugins.Banner).to.not.be.undefined

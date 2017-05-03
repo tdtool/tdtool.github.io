@@ -44,7 +44,8 @@
     "exclude": [
       "lib",
       "mochawesome-report",
-      "node_modules"
+      "node_modules",
+      "src/util/exec.js"
     ],
     "extension": [
       ".js"
@@ -72,7 +73,6 @@
   },
   "dependencies": {
     "css-loader": "^0.28.0",
-    "extract-text-webpack-plugin": "2",
     "html-webpack-plugin": "^2.28.0",
     "less": "^2.7.2",
     "less-loader": "^4.0.3",

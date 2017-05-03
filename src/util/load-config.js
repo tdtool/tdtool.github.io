@@ -10,9 +10,8 @@ import webpack from 'webpack'
 import ProgressBarPlugin from 'progress-bar-webpack-plugin'
 
 import is from './is'
-import extractCss from './extract-css'
 import loadTemplate from './load-template'
-import { DIST, PUBLIC_PATH, URL_LOADER_LIMIT } from './constant'
+import { DIST, PUBLIC_PATH } from './constant'
 
 /**
  * generate tdtool config by user options
@@ -65,10 +64,6 @@ module.exports = options => {
   // externals
   if (options.externals) {
     config.externals = options.externals
-  }
-  // urlLoaderLimit
-  if (options.urlLoaderLimit) {
-    config.urlLoaderLimit = options.urlLoaderLimit
   }
   // filename
   config.output.filename = options.filename || '[name].js'
@@ -128,8 +123,6 @@ module.exports = options => {
   if (process.env.NODE_ENV === 'production') {
     config.bail = true
   }
-  // extractCss
-  extractCss(options, config)
   // ProgressBarPlugin
   config.plugins.ProgressBar = new ProgressBarPlugin()
 
