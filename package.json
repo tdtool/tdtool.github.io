@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "A modular build tool based on webpack2",
   "main": "lib/index.js",
+  "bin": {
+    "tdtool": "./bin/cli"
+  },
   "repository": "https://github.com/tdtool/tdtool.github.io.git",
   "author": "zhengfeng.yao",
   "license": "MIT",
