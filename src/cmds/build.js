@@ -10,17 +10,9 @@ import fs from 'fs'
 import path from 'path'
 import webpack from 'webpack'
 
-module.exports = function build(options) {
-  return new Promise((resolve, reject) => {
-    let configs = []
-    if (!options.config) {
-      configs.push('tdtool.config.js')
-    } else {
-      configs = options.config.split(',')
-      if (!configs.length) {
-        configs.push('tdtool.config.js')
-      }
-    }
+module.exports = async function build(options) {
+  await new Promise((resolve, reject) => {
+    let configs = options.config.split(',')
     const wbpcs = configs.map(item => {
       const configPath = path.resolve(process.cwd(), item)
       if (!fs.existsSync(configPath)) {

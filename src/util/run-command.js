@@ -6,17 +6,15 @@
  */
 
 import 'babel-polyfill';
-function format(time) {
- return time.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, '$1');
-}
+import logger from './logger'
 
 module.exports = function run(fn, options) {
  const task = typeof fn.default === 'undefined' ? fn : fn.default;
  const start = new Date();
- console.log(`[${format(start)}] Starting '${task.name}'...`);
+ logger.warn(`Starting '${task.name}'...`);
  return task(options).then(() => {
    const end = new Date();
    const time = end.getTime() - start.getTime();
-   console.log(`[${format(end)}] Finished '${task.name}' after ${time} ms`);
- }).catch(err => console.error(err.stack));
+   logger.success(`Finished '${task.name}' after ${time} ms`);
+ }).catch(err => logger.fatal(err.stack));
 };

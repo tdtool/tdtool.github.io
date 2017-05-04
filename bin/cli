@@ -3,15 +3,17 @@
 var program = require('commander')
 var version = require('../package').version
 var run = require('../lib/util/run-command')
-var build = require('../cmds/build')
+var build = require('../lib/cmds/build')
 
 program
   .version(version, '-v, --version');
 
 program
   .command('build')
-  .option('-c, --config', 'config file paths')
+  .option('-c, --config <config>', 'config file paths', 'tdtool.config.js')
   .option('-w, --watch', 'rebuild on file change')
   .action(function(options) {
     run(build.bind(undefined, options));
   });
+
+program.parse(process.argv);

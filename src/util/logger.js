@@ -13,14 +13,19 @@ const prefix = `[tdtool@${version}]`
 const sep = chalk.gray('-')
 const isTest = process.env.NODE_ENV === 'test'
 
+function formatTime(time) {
+ return time.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, '$1');
+}
+
 /**
  * Log a `message` to the console
  *
  * @param {String} message
  */
-exports.info = () => {
+exports.info = function() {
   const msg = format.apply(format, arguments)
-  console.log(chalk.cyan(prefix), sep, msg)
+  const time = new Date()
+  console.log(chalk.cyan(`${prefix}[${formatTime(time)}]`), sep, msg)
 }
 
 /**
@@ -28,13 +33,14 @@ exports.info = () => {
  *
  * @param {String} message
  */
-exports.error = message => {
+exports.error = function(message) {
   if (message instanceof Error) {
     message = message.message.trim()
   }
 
   const msg = format.apply(format, arguments)
-  console.error(chalk.red(prefix), sep, msg)
+  const time = new Date()
+  console.error(chalk.red(`${prefix}[${formatTime(time)}]`), sep, msg)
 }
 
 /**
@@ -42,7 +48,7 @@ exports.error = message => {
  *
  * @param {String} message
  */
-exports.fatal = msg => {
+exports.fatal = function(msg) {
   exports.error(msg)
 
   if (process.env.NODE_ENV === 'test') {
@@ -57,9 +63,10 @@ exports.fatal = msg => {
  *
  * @param {String} message
  */
-exports.warn = () => {
+exports.warn = function() {
   const msg = format.apply(format, arguments)
-  console.log(chalk.yellow(prefix), sep, msg)
+  const time = new Date()
+  console.log(chalk.yellow(`${prefix}[${formatTime(time)}]`), sep, msg)
 }
 
 /**
@@ -67,7 +74,8 @@ exports.warn = () => {
  *
  * @param {String} message
  */
-exports.success = () => {
+exports.success = function() {
   const msg = format.apply(format, arguments)
-  console.log(chalk.green(prefix), sep, msg)
+  const time = new Date()
+  console.log(chalk.green(`${prefix}[${formatTime(time)}]`), sep, msg)
 }
