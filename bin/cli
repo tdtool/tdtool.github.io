@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+
+var program = require('commander')
+var version = require('../package').version
+var run = require('../lib/util/run-command')
+var build = require('../cmds/build')
+
+program
+  .version(version, '-v, --version');
+
+program
+  .command('build')
+  .option('-c, --config', 'config file paths')
+  .option('-w, --watch', 'rebuild on file change')
+  .action(function(options) {
+    run(build.bind(undefined, options));
+  });

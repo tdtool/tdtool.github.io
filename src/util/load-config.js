@@ -7,6 +7,7 @@
 
 import path from 'path'
 import webpack from 'webpack'
+import CleanWebpackPlugin from 'clean-webpack-plugin'
 import ProgressBarPlugin from 'progress-bar-webpack-plugin'
 
 import is from './is'
@@ -50,12 +51,6 @@ module.exports = options => {
   // template
   if (options.template !== false) {
     config.plugins.templates = loadTemplate(options.template)
-  }
-  // clean
-  if (is.Boolean(options.clean)) {
-    config.__CLEAN__ = options.clean
-  } else {
-    config.__CLEAN__ = true
   }
   // alias
   if (options.alias) {

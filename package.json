@@ -72,6 +72,9 @@
     "rimraf": "^2.6.1"
   },
   "dependencies": {
+    "babel-polyfill": "^6.23.0",
+    "clean-webpack-plugin": "^0.1.16",
+    "commander": "^2.9.0",
     "css-loader": "^0.28.0",
     "html-webpack-plugin": "^2.28.0",
     "less": "^2.7.2",

@@ -24,7 +24,6 @@ describe("index", () => {
       },
       template: true,
       sourceMap: true,
-      clean: false,
       minimize: true
     })
     const config = configObj.config
@@ -33,7 +32,6 @@ describe("index", () => {
     expect(config.resolve.alias.test).to.equal('./test.js')
     expect(config.plugins.templates['index.html']).to.not.be.undefined
     expect(config.devtool).to.equal('source-map')
-    expect(config.__CLEAN__).to.equal(false)
     expect(config.plugins.UglifyJs).to.not.be.undefined
     expect(config.plugins.LoaderOptions).to.not.be.undefined
     expect(config.plugins.NoErrors).to.not.be.undefined
