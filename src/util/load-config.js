@@ -37,7 +37,8 @@ module.exports = options => {
     },
     devServer: {},
     resolve: {
-      modules: ['node_modules', path.resolve(process.cwd(), 'node_modules'), path.resolve(__dirname, '../../node_modules')].concat(options.modules)
+      modules: ['node_modules', path.resolve(process.cwd(), 'node_modules'), path.resolve(__dirname, '../../node_modules')]
+        .concat(options.modules).filter(is.valid)
     }
   }
   // node env
@@ -50,7 +51,7 @@ module.exports = options => {
   });
   // template
   if (options.template !== false) {
-    config.plugins.templates = loadTemplate(options.template)
+    Object.assign(config.plugins, loadTemplate(options.template))
   }
   // alias
   if (options.alias) {
