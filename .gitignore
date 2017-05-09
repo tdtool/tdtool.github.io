@@ -40,3 +40,6 @@ jspm_packages
 mochawesome-report
 .idea
 .nyc_output
+_book
+docs
+lib

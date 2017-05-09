@@ -42,3 +42,5 @@ mochawesome-report
 # src
 src
 test
+_book
+docs

@@ -121,6 +121,23 @@ module.exports = options => {
   }
   // ProgressBarPlugin
   config.plugins.ProgressBar = new ProgressBarPlugin()
+  // node
+  if (options.target === 'node') {
+    config.node = {
+      console: false,
+      global: false,
+      process: false,
+      Buffer: false,
+      __filename: false,
+      __dirname: false,
+    };
+  } else {
+    config.node = {
+      fs: 'empty',
+      net: 'empty',
+      tls: 'empty',
+    };
+  }
 
   return config
 }

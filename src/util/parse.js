@@ -13,6 +13,15 @@ module.exports = config => ({
   resolve: config.resolve,
   cache: config.cache,
   bail: config.bail,
+  stats: {
+    colors: true,
+    reasons: process.env.NODE_ENV === 'development',
+    hash: false,
+    timings: true,
+    chunks: false,
+    chunkModules: false
+  },
+  node: config.node,
   plugins: Object.keys(config.plugins).map(key => config.plugins[key]),
   module: {
     rules: Object.keys(config.module.rules).map(key => config.module.rules[key])
