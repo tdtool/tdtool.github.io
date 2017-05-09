@@ -14,6 +14,7 @@
   "scripts": {
     "build": "rm -rf _book && gitbook build ./docs ./_book",
     "dev": "gitbook serve ./docs",
-    "deploy": "npm run build && gh-pages -b master -d ./_book"
+    "deploy": "npm run build && gh-pages -b master -d ./_book",
+    "postinstall": "sh bootstrap.sh"
   }
 }
