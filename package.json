@@ -1,0 +1,19 @@
+{
+  "name": "tdtool.github.io",
+  "version": "0.0.1",
+  "description": "TDTool documention",
+  "repository": "https://github.com/tdtool/tdtool.github.io.git",
+  "author": "zhengfeng.yao",
+  "license": "MIT",
+  "keywords": [
+    "tdtool",
+    "build",
+    "webpack2"
+  ],
+  "homepage": "https://tdtool.github.io",
+  "scripts": {
+    "build": "rm -rf _book && gitbook build ./docs ./_book",
+    "dev": "gitbook serve ./docs",
+    "deploy": "npm run build && gh-pages -b master -d ./_book"
+  }
+}

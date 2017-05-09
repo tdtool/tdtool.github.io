@@ -1,0 +1,57 @@
+{
+  "title": "TDTool",
+  "language": "zh",
+  "plugins": ["edit-link", "toc", "-lunr", "-search", "search-pro", "prism",
+    "-highlight", "anchor-navigation-ex", "splitter",
+    "github", "github-buttons", "ga"
+  ],
+  "pluginsConfig": {
+    "edit-link": {
+      "base": "https://github.com/tdtool/tdtool.github.io/tree/gh-pages",
+      "label": "Edit This Page"
+    },
+    "sharing": {
+      "weibo": true,
+      "facebook": true,
+      "twitter": true,
+      "google": false,
+      "instapaper": false,
+      "vk": false,
+      "all": [
+        "facebook", "google", "twitter",
+        "weibo", "instapaper"
+      ]
+    },
+    "search-pro": {
+      "cutWordLib": "nodejieba",
+      "defineWord": ["Gitbook Use"]
+    },
+    "anchor-navigation-ex": {
+      "showLevel": true,
+      "associatedWithSummary": true,
+      "mode": "float",
+      "float": {
+        "showLevelIcon": false,
+        "level1Icon": "fa fa-hand-o-right",
+        "level2Icon": "fa fa-hand-o-right",
+        "level3Icon": "fa fa-hand-o-right"
+      }
+    },
+    "theme-default": {
+      "showLevel": true
+    },
+    "github": {
+      "url": "https://github.com/tdtool"
+    },
+    "github-buttons": {
+      "repo": "tdtool/tdtool.github.io",
+      "types": [
+        "star"
+      ],
+      "size": "small"
+    },
+    "ga": {
+      "token": "UA-98793122-1"
+    }
+  }
+}
