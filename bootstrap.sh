@@ -5,9 +5,9 @@ if which gitbook 2>/dev/null; then
 else
   echo "no gitbook installed. Begin to install."
   if which yarn 2>/dev/null; then
-    yarn global add gitbook
+    yarn global add gitbook-cli
   else
-    npm i gitbook -g
+    npm i gitbook-cli -g
   fi
 fi
 
