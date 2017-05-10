@@ -19,12 +19,15 @@ module.exports = config => ({
     hash: false,
     timings: true,
     chunks: false,
-    chunkModules: false
+    chunkModules: false,
+    cached: false,
+    cachedAssets: false
   },
   node: config.node,
   plugins: Object.keys(config.plugins).map(key => config.plugins[key]),
   module: {
     rules: Object.keys(config.module.rules).map(key => config.module.rules[key])
   },
-  externals: config.externals
+  externals: config.externals,
+  devServer: config.devServer
 })

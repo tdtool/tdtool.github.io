@@ -12,6 +12,7 @@ import ProgressBarPlugin from 'progress-bar-webpack-plugin'
 
 import is from './is'
 import loadTemplate from './load-template'
+import loadDevServer from './load-devServer'
 import { DIST, PUBLIC_PATH } from './constant'
 
 /**
@@ -71,6 +72,7 @@ module.exports = options => {
     comments: false,
     compress: {
       screw_ie8: true,
+      warnings: false,
       unused: true,
       dead_code: true,
       collapse_vars: true,
@@ -138,6 +140,8 @@ module.exports = options => {
       tls: 'empty',
     };
   }
+  // dev server
+  loadDevServer(config, options.devServer)
 
   return config
 }

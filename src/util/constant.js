@@ -6,4 +6,4 @@
  */
 
 export const DIST = './dist'
-export const PUBLIC_PATH = '/dist/'
+export const PUBLIC_PATH = '/'

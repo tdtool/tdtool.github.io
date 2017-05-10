@@ -4,6 +4,7 @@ var program = require('commander')
 var version = require('../package').version
 var run = require('../lib/util/run-command')
 var build = require('../lib/cmds/build')
+var start = require('../lib/cmds/start')
 
 program
   .version(version, '-v, --version');
@@ -15,5 +16,13 @@ program
   .action(function(options) {
     run(build.bind(undefined, options));
   });
+
+program
+  .command('start')
+  .option('-c, --config <config>', 'config file paths', 'tdtool.config.js')
+  .option('-p, --port <port>', 'webpack dev server port', 9090)
+  .action(function(options) {
+    run(start.bind(undefined, options))
+  })
 
 program.parse(process.argv);
