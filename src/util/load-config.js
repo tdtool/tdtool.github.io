@@ -142,6 +142,17 @@ module.exports = options => {
   }
   // dev server
   loadDevServer(config, options.devServer)
+  // stats
+  config.stats = {
+    colors: true,
+    reasons: process.env.NODE_ENV === 'development',
+    hash: false,
+    timings: true,
+    chunks: false,
+    chunkModules: false,
+    cached: false,
+    cachedAssets: false
+  }
 
   return config
 }

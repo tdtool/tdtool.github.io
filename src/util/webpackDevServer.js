@@ -29,39 +29,39 @@ class WebpackDevServer {
     // this.config.output.publicPath = getPublicPath(this.config, port)
 
     // 为client端增加热加载模块
-    // this.wbpcs.filter(x => x.target !== 'node').forEach(config => {
-    //   if (is.Array(config.entry)) {
-    //     config.entry.unshift(`webpack-dev-server/client?http://localhost:${port}`, 'webpack/hot/dev-server')
-    //   } else if (is.Object(config.entry)) {
-    //     Object.keys(config.entry).forEach(key => {
-    //       if (is.Array(config.entry[key])) {
-    //         config.entry[key].unshift(`webpack-dev-server/client?http://localhost:${port}`, 'webpack/hot/dev-server')
-    //       } else {
-    //         config.entry[key] = [`webpack-dev-server/client?http://localhost:${port}`, 'webpack/hot/dev-server', config.entry[key]]
-    //       }
-    //     })
-    //   } else {
-    //     config.entry = [`webpack-dev-server/client?http://localhost:${port}`, 'webpack/hot/dev-server', config.entry]
-    //   }
-    //
-    //   const rule = config.module.rules.find(x => x.loader === 'babel-loader')
-    //   if (rule && rule.query) {
-    //     rule.query.plugins = [ [
-    //       require.resolve('babel-plugin-react-transform'), {
-    //         transforms: [
-    //           {
-    //             transform: 'react-transform-hmr',
-    //             imports: ['react'],
-    //             locals: ['module'],
-    //           }, {
-    //             transform: 'react-transform-catch-errors',
-    //             imports: ['react', 'redbox-react'],
-    //           },
-    //         ],
-    //       }
-    //     ]].concat(rule.query.plugins || [])
-    //   }
-    // })
+    this.wbpcs.filter(x => x.target !== 'node').forEach(config => {
+      if (is.Array(config.entry)) {
+        config.entry.unshift(`webpack-dev-server/client?http://localhost:${port}`, 'webpack/hot/dev-server')
+      } else if (is.Object(config.entry)) {
+        Object.keys(config.entry).forEach(key => {
+          if (is.Array(config.entry[key])) {
+            config.entry[key].unshift(`webpack-dev-server/client?http://localhost:${port}`, 'webpack/hot/dev-server')
+          } else {
+            config.entry[key] = [`webpack-dev-server/client?http://localhost:${port}`, 'webpack/hot/dev-server', config.entry[key]]
+          }
+        })
+      } else {
+        config.entry = [`webpack-dev-server/client?http://localhost:${port}`, 'webpack/hot/dev-server', config.entry]
+      }
+
+      const rule = config.module.rules.find(x => x.loader === 'babel-loader')
+      if (rule && rule.query) {
+        rule.query.plugins = [ [
+          require.resolve('babel-plugin-react-transform'), {
+            transforms: [
+              {
+                transform: 'react-transform-hmr',
+                imports: ['react'],
+                locals: ['module'],
+              }, {
+                transform: 'react-transform-catch-errors',
+                imports: ['react', 'redbox-react'],
+              },
+            ],
+          }
+        ]].concat(rule.query.plugins || [])
+      }
+    })
   }
 
   run() {
