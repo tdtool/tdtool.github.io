@@ -30,7 +30,7 @@ describe("index", () => {
     expect(config.entry).to.equal('test.js')
     expect(config.externals.jquery).to.equal('window.$')
     expect(config.resolve.alias.test).to.equal('./test.js')
-    expect(config.plugins.templates['index.html']).to.not.be.undefined
+    expect(config.plugins['index.html']).to.not.be.undefined
     expect(config.devtool).to.equal('source-map')
     expect(config.plugins.UglifyJs).to.not.be.undefined
     expect(config.plugins.LoaderOptions).to.not.be.undefined
@@ -69,6 +69,6 @@ describe("index", () => {
     expect(config.plugins.Banner).to.not.be.undefined
     expect(config.plugins.UglifyJs).to.not.be.undefined
     expect(config.plugins.LoaderOptions).to.not.be.undefined
-    expect(config.plugins.templates['index.html'].options.template).to.equal(path.resolve(process.cwd(), 'index.tpl'))
+    expect(config.plugins['index.html'].options.template).to.equal(path.resolve(process.cwd(), 'index.tpl'))
   })
 })
