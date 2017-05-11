@@ -36,7 +36,6 @@ module.exports = options => {
     module: {
       rules: {}
     },
-    devServer: {},
     resolve: {
       modules: ['node_modules', path.resolve(process.cwd(), 'node_modules'), path.resolve(__dirname, '../../node_modules')]
         .concat(options.modules).filter(is.valid)

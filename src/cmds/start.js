@@ -41,7 +41,6 @@ module.exports = async function start(options) {
     await server.run()
   } else {
     sConfig.plugins.push(new WriteFilePlugin({log: false}))
-    const runServer = runNodeServer(sConfig)
     await new Promise(resolve => {
       // 为client端增加热加载模块
       wbpcs.filter(x => x.target !== 'node').forEach(config => {
@@ -78,7 +77,7 @@ module.exports = async function start(options) {
       })
 
       let handleServerBundleComplete = async () => {
-        handleServerBundleComplete = stats => !stats.stats[1].compilation.errors.length && runNodeServer()
+        handleServerBundleComplete = stats => !stats.stats[1].compilation.errors.length && runNodeServer(sConfig)
 
         const server = await runNodeServer(sConfig)
         const bs = Browsersync.create()
