@@ -1,2 +1,3 @@
-# Extensions
+## Extensions
 
+* [Plugins](extension/plugins.md)

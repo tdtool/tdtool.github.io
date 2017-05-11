@@ -1,2 +1,3 @@
-# 扩展
+## 扩展
 
+* [插件](extension/plugins.md)

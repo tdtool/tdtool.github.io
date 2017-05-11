@@ -27,7 +27,7 @@
       "defineWord": ["Gitbook Use"]
     },
     "anchor-navigation-ex": {
-      "showLevel": true,
+      "showLevel": false,
       "associatedWithSummary": true,
       "mode": "float",
       "float": {
@@ -38,7 +38,7 @@
       }
     },
     "theme-default": {
-      "showLevel": true
+      "showLevel": false
     },
     "github": {
       "url": "https://github.com/tdtool"
