@@ -7,7 +7,7 @@
   ],
   "pluginsConfig": {
     "edit-link": {
-      "base": "https://github.com/tdtool/tdtool.github.io/tree/gh-pages",
+      "base": "https://github.com/tdtool/tdtool.github.io/tree/gh-pages/docs",
       "label": "Edit This Page"
     },
     "sharing": {
