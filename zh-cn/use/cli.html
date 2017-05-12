@@ -334,7 +334,77 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#1-cli"><b></b>CLI</a></li></ul></div><a href="#1-cli" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="1-cli"><a name="1-cli" class="anchor-navigation-ex-anchor" href="#1-cli"><i class="fa fa-link" aria-hidden="true"></i></a>CLI</h1>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-anchor"></i><ul><li><span class="title-icon "></span><a href="#1-cli"><b></b>CLI</a></li><ul><li><span class="title-icon "></span><a href="#11-&#x521D;&#x59CB;&#x5316;&#x5F85;&#x5B9E;&#x73B0;"><b></b>&#x521D;&#x59CB;&#x5316;(&#x5F85;&#x5B9E;&#x73B0;)</a></li><ul><li><span class="title-icon "></span><a href="#111-create--generator-name"><b></b>create  [generator-name]</a></li></ul><li><span class="title-icon "></span><a href="#12-&#x5F00;&#x53D1;"><b></b>&#x5F00;&#x53D1;</a></li><ul><li><span class="title-icon "></span><a href="#121-build"><b></b>build</a></li><li><span class="title-icon "></span><a href="#122-start"><b></b>start</a></li></ul><li><span class="title-icon "></span><a href="#13-&#x63D2;&#x4EF6;&#x5F00;&#x53D1;&#x4E2D;"><b></b>&#x63D2;&#x4EF6;(&#x5F00;&#x53D1;&#x4E2D;)</a></li><ul><li><span class="title-icon "></span><a href="#131-import"><b></b>import</a></li><li><span class="title-icon "></span><a href="#132-update"><b></b>update</a></li><li><span class="title-icon "></span><a href="#133-remove"><b></b>remove</a></li><li><span class="title-icon "></span><a href="#134-list"><b></b>list</a></li></ul><li><span class="title-icon "></span><a href="#14-&#x5176;&#x4ED6;&#x5F00;&#x53D1;&#x4E2D;"><b></b>&#x5176;&#x4ED6;(&#x5F00;&#x53D1;&#x4E2D;)</a></li><ul><li><span class="title-icon "></span><a href="#141-freeze"><b></b>freeze</a></li><li><span class="title-icon "></span><a href="#142-unfreeze"><b></b>unfreeze</a></li></ul></ul></ul></div><a href="#1-cli" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="1-cli"><a name="1-cli" class="anchor-navigation-ex-anchor" href="#1-cli"><i class="fa fa-link" aria-hidden="true"></i></a>CLI</h1>
+<p>&#x63D0;&#x4F9B;&#x4E86;&#x57FA;&#x672C; create/build/start &#x547D;&#x4EE4;&#xFF0C;&#x540C;&#x65F6;&#x63D0;&#x4F9B;&#x4E00;&#x7EC4;&#x7BA1;&#x7406;&#x811A;&#x624B;&#x67B6;&#x7684;&#x6307;&#x4EE4;&#x3002;</p>
+<h2 id="11-&#x521D;&#x59CB;&#x5316;&#x5F85;&#x5B9E;&#x73B0;"><a name="11-&#x521D;&#x59CB;&#x5316;&#x5F85;&#x5B9E;&#x73B0;" class="anchor-navigation-ex-anchor" href="#11-&#x521D;&#x59CB;&#x5316;&#x5F85;&#x5B9E;&#x73B0;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x521D;&#x59CB;&#x5316;(&#x5F85;&#x5B9E;&#x73B0;)</h2>
+<h3 id="111-create--generator-name"><a name="111-create--generator-name" class="anchor-navigation-ex-anchor" href="#111-create--generator-name"><i class="fa fa-link" aria-hidden="true"></i></a>create  [generator-name]</h3>
+<p>&#x521B;&#x5EFA;&#x9879;&#x76EE;&#x76EE;&#x5F55;&#x5E76;&#x6267;&#x884C;&#x811A;&#x624B;&#x67B6;</p>
+<pre class="language-"><code class="lang-bash"><span class="token comment" spellcheck="true"># &#x521B;&#x5EFA;&#x4E00;&#x4E2A; my-project &#x76EE;&#x5F55;&#x5E76;&#x8FD0;&#x884C; react &#x7684;&#x811A;&#x624B;&#x67B6;</span>
+$ cooking create my-project react
+</code></pre>
+<h2 id="12-&#x5F00;&#x53D1;"><a name="12-&#x5F00;&#x53D1;" class="anchor-navigation-ex-anchor" href="#12-&#x5F00;&#x53D1;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5F00;&#x53D1;</h2>
+<h3 id="121-build"><a name="121-build" class="anchor-navigation-ex-anchor" href="#121-build"><i class="fa fa-link" aria-hidden="true"></i></a>build</h3>
+<p>&#x751F;&#x4EA7;&#x6A21;&#x5F0F;&#xFF0C;&#x751F;&#x6210;&#x6700;&#x7EC8;&#x7684;&#x90E8;&#x7F72;&#x4EE3;&#x7801;</p>
+<pre class="language-"><code class="lang-bash">$ process.env.NODE_ENV<span class="token operator">=</span>production <span class="token operator">&amp;&amp;</span> tdtool build
+</code></pre>
+<ul>
+<li>-c --config
+&#x9ED8;&#x8BA4;&#x8BFB;&#x53D6; tdtool.config.js &#x914D;&#x7F6E;&#xFF0C;&#x4E5F;&#x53EF;&#x6307;&#x5B9A;&#x914D;&#x7F6E;&#x6587;&#x4EF6;<pre class="language-"><code class="lang-bash">$ tdtool build -c webpack.config.js
+</code></pre>
+&#x63A5;&#x53D7;&#x4F20;&#x5165;&#x6587;&#x4EF6;&#x6570;&#x7EC4;&#xFF0C;&#x7528;&#x9017;&#x53F7;&#x5206;&#x9694;<pre class="language-"><code class="lang-bash">$ tdtool build -c tdtool.config.dev.js,tdtool.config.server.js
+</code></pre>
+</li>
+<li>-w --watch
+&#x76D1;&#x63A7;&#x6587;&#x4EF6;&#x53D8;&#x5316;&#xFF0C;&#x81EA;&#x52A8;&#x7F16;&#x8BD1;<pre class="language-"><code class="lang-bash">$ tdtool build -w -c tdtool.config.prod.js
+</code></pre>
+</li>
+</ul>
+<h3 id="122-start"><a name="122-start" class="anchor-navigation-ex-anchor" href="#122-start"><i class="fa fa-link" aria-hidden="true"></i></a>start</h3>
+<p>&#x5F00;&#x53D1;&#x6A21;&#x5F0F;&#xFF0C;&#x6240;&#x6709;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x9700;&#x8981;&#x914D;&#x7F6E;&#x4E14;&#x53EA;&#x80FD;&#x914D;&#x7F6E;&#x4E00;&#x4E2A;devServer</p>
+<pre class="language-"><code class="lang-bash">$ tdtool start
+</code></pre>
+<ul>
+<li>-c --config
+&#x9ED8;&#x8BA4;&#x8BFB;&#x53D6; tdtool.config.js &#x914D;&#x7F6E;&#xFF0C;&#x4E5F;&#x53EF;&#x6307;&#x5B9A;&#x914D;&#x7F6E;&#x6587;&#x4EF6;<pre class="language-"><code class="lang-bash">$ tdtool start -c webpack.config.js
+</code></pre>
+&#x63A5;&#x53D7;&#x4F20;&#x5165;&#x6587;&#x4EF6;&#x6570;&#x7EC4;&#xFF0C;&#x7528;&#x9017;&#x53F7;&#x5206;&#x9694;<pre class="language-"><code class="lang-bash">$ tdtool start -c tdtool.config.dev.js,tdtool.config.server.js
+</code></pre>
+</li>
+</ul>
+<h2 id="13-&#x63D2;&#x4EF6;&#x5F00;&#x53D1;&#x4E2D;"><a name="13-&#x63D2;&#x4EF6;&#x5F00;&#x53D1;&#x4E2D;" class="anchor-navigation-ex-anchor" href="#13-&#x63D2;&#x4EF6;&#x5F00;&#x53D1;&#x4E2D;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x63D2;&#x4EF6;(&#x5F00;&#x53D1;&#x4E2D;)</h2>
+<p>&#x591A;&#x4E2A;&#x63D2;&#x4EF6;&#x7528;&#x9017;&#x53F7;&#x5206;&#x9694;</p>
+<h3 id="131-import"><a name="131-import" class="anchor-navigation-ex-anchor" href="#131-import"><i class="fa fa-link" aria-hidden="true"></i></a>import</h3>
+<p>&#x5B89;&#x88C5;&#x811A;&#x624B;&#x67B6;</p>
+<pre class="language-"><code class="lang-bash"><span class="token comment" spellcheck="true"># &#x5B89;&#x88C5;&#x811A;&#x624B;&#x67B6;</span>
+$ tdtool <span class="token function">import</span> react
+</code></pre>
+<h3 id="132-update"><a name="132-update" class="anchor-navigation-ex-anchor" href="#132-update"><i class="fa fa-link" aria-hidden="true"></i></a>update</h3>
+<pre class="language-"><code class="lang-bash"><span class="token comment" spellcheck="true"># &#x66F4;&#x65B0;&#x811A;&#x624B;&#x67B6;</span>
+$ tdtool update react
+</code></pre>
+<h3 id="133-remove"><a name="133-remove" class="anchor-navigation-ex-anchor" href="#133-remove"><i class="fa fa-link" aria-hidden="true"></i></a>remove</h3>
+<pre class="language-"><code class="lang-bash"><span class="token comment" spellcheck="true"># &#x5220;&#x9664;&#x811A;&#x624B;&#x67B6;</span>
+$ tdtool remove react
+</code></pre>
+<h3 id="134-list"><a name="134-list" class="anchor-navigation-ex-anchor" href="#134-list"><i class="fa fa-link" aria-hidden="true"></i></a>list</h3>
+<p>&#x67E5;&#x770B;&#x5B89;&#x88C5;&#x7684;&#x811A;&#x624B;&#x67B6;&#x5217;&#x8868;</p>
+<pre class="language-"><code class="lang-bash">$ tdtool list
+</code></pre>
+<h2 id="14-&#x5176;&#x4ED6;&#x5F00;&#x53D1;&#x4E2D;"><a name="14-&#x5176;&#x4ED6;&#x5F00;&#x53D1;&#x4E2D;" class="anchor-navigation-ex-anchor" href="#14-&#x5176;&#x4ED6;&#x5F00;&#x53D1;&#x4E2D;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5176;&#x4ED6;(&#x5F00;&#x53D1;&#x4E2D;)</h2>
+<h3 id="141-freeze"><a name="141-freeze" class="anchor-navigation-ex-anchor" href="#141-freeze"><i class="fa fa-link" aria-hidden="true"></i></a>freeze</h3>
+<p>&#x9501;&#x5B9A;package.json&#x4E2D;&#x4F9D;&#x8D56;&#x5305;&#x7684;&#x7248;&#x672C;&#x53F7;&#xFF0C;&#x4F8B;&#x5982; &gt;=1.0.0 -&gt; 1.0.0</p>
+<pre class="language-"><code class="lang-bash">$ tdtool freeze
+</code></pre>
+<p>&#x4E5F;&#x53EF;&#x5236;&#x5B9A;&#x5177;&#x4F53;&#x67D0;&#x4E2A;&#x5305;</p>
+<pre class="language-"><code class="lang-bash">$ tdtool freeze webpack
+</code></pre>
+<h3 id="142-unfreeze"><a name="142-unfreeze" class="anchor-navigation-ex-anchor" href="#142-unfreeze"><i class="fa fa-link" aria-hidden="true"></i></a>unfreeze</h3>
+<p>&#x89E3;&#x9501;&#x9501;package.json&#x4E2D;&#x4F9D;&#x8D56;&#x5305;&#x7684;&#x7248;&#x672C;&#x53F7;&#xFF0C;&#x4F8B;&#x5982; 1.0.0 -&gt; &gt;=1.0.0</p>
+<pre class="language-"><code class="lang-bash">$ tdtool unfreeze
+</code></pre>
+<p>&#x4E5F;&#x53EF;&#x5236;&#x5B9A;&#x5177;&#x4F53;&#x67D0;&#x4E2A;&#x5305;</p>
+<pre class="language-"><code class="lang-bash">$ tdtool unfreeze webpack
+</code></pre>
 
                                 
                                 </section>
@@ -378,7 +448,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"CLI","level":"1.3.3","depth":2,"next":{"title":"扩展","level":"1.4","depth":1,"path":"extension/index.md","ref":"extension/index.md","articles":[{"title":"插件","level":"1.4.1","depth":2,"path":"extension/plugins.md","ref":"extension/plugins.md","articles":[]}]},"previous":{"title":"方法","level":"1.3.2","depth":2,"path":"use/api.md","ref":"use/api.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","toc","-lunr","-search","search-pro","prism","-highlight","anchor-navigation-ex","splitter","github","github-buttons","ga"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/tdtool"},"splitter":{},"search-pro":{"cutWordLib":"nodejieba","defineWord":["Gitbook Use"]},"toc":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"mode":"float","pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"showLevel":false},"github-buttons":{"repo":"tdtool/tdtool.github.io","types":["star"],"size":"small"},"ga":{"configuration":"auto","token":"UA-98793122-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":true,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/tdtool/tdtool.github.io/tree/gh-pages/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"TDTool","language":"zh-cn","gitbook":"*"},"file":{"path":"use/cli.md","mtime":"2017-05-11T02:59:50.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-05-11T12:18:56.205Z"},"basePath":"..","book":{"language":"zh-cn"}});
+            gitbook.page.hasChanged({"page":{"title":"CLI","level":"1.3.3","depth":2,"next":{"title":"扩展","level":"1.4","depth":1,"path":"extension/index.md","ref":"extension/index.md","articles":[{"title":"插件","level":"1.4.1","depth":2,"path":"extension/plugins.md","ref":"extension/plugins.md","articles":[]}]},"previous":{"title":"方法","level":"1.3.2","depth":2,"path":"use/api.md","ref":"use/api.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","toc","-lunr","-search","search-pro","prism","-highlight","anchor-navigation-ex","splitter","github","github-buttons","ga"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/tdtool"},"splitter":{},"search-pro":{"cutWordLib":"nodejieba","defineWord":["Gitbook Use"]},"toc":{},"fontsettings":{"theme":"white","family":"sans","size":2},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"level1Icon":"fa fa-hand-o-right","level2Icon":"fa fa-hand-o-right","level3Icon":"fa fa-hand-o-right","showLevelIcon":false},"mode":"float","pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"showLevel":false},"github-buttons":{"repo":"tdtool/tdtool.github.io","types":["star"],"size":"small"},"ga":{"configuration":"auto","token":"UA-98793122-1"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":true,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/tdtool/tdtool.github.io/tree/gh-pages/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"TDTool","language":"zh-cn","gitbook":"*"},"file":{"path":"use/cli.md","mtime":"2017-05-12T03:00:48.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-05-12T03:01:42.703Z"},"basePath":"..","book":{"language":"zh-cn"}});
         });
     </script>
 </div>
