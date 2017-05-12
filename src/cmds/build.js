@@ -6,6 +6,7 @@
  */
 
 import logger from '../util/logger'
+import is from '../util/is'
 import fs from 'fs'
 import path from 'path'
 import webpack from 'webpack'
@@ -19,7 +20,13 @@ module.exports = async function build(options) {
         logger.fatal(`Config file ${configPath} does not exist.`)
       }
       return require(configPath)
-    })
+    }).reduce((result, item) => {
+      if (is.Array(item)) {
+        return result.concat(item)
+      }
+      result.push(item)
+      return result
+    }, [])
 
     const finished = (err, stats) => {
       if (err) {

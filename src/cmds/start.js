@@ -27,11 +27,25 @@ module.exports = async function start(options) {
       logger.fatal(`Config file ${configPath} does not exist.`)
     }
     const config = require(configPath)
-    if (config.devServer) {
-      serverCount++
+    if (is.Array) {
+      config.forEach(item => {
+        if (item.devServer) {
+          serverCount++
+        }
+      })
+    } else {
+      if (config.devServer) {
+        serverCount++
+      }
     }
     return config
-  })
+  }).reduce((result, item) => {
+    if (is.Array(item)) {
+      return result.concat(item)
+    }
+    result.push(item)
+    return result
+  }, [])
   if (serverCount > 1) {
     logger.fatal(`Only one server support. Server count: ${serverCount}`)
   }
