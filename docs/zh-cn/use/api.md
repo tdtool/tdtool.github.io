@@ -70,6 +70,15 @@ config.add('output.filename', '[name].bundle.js')
 // 将 {test: /\.es6$/,use: ['babel-loader']} 删除
 config.remove('rule.es6')
 ```
+默认设置的plugin包含
+  plugin.define
+  plugin.UglifyJs
+  plugin.LoaderOptions
+  plugin.SourceMapDevTool
+  plugin.Banner
+  plugin.NoErrors
+  plugin.ProgressBar
+  plugin.HotModule
 
 ## resolve()
 
