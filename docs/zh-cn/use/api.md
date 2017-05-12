@@ -82,7 +82,7 @@ config.remove('rule.es6')
 
 ## resolve()
 
-返回最终的 webpack2 配置。rule 和 plugin 的配置在 cooking 里是以 Object 的形式存储的，resolve 会将其转换成数组
+返回最终的 webpack2 配置。rule 和 plugin 的配置在 tdtool 里是以 Object 的形式存储的，resolve 会将其转换成数组
 ```js
 var webpackConfig = coofig.resolve()
 

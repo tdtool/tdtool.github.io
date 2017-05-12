@@ -8,7 +8,7 @@
 创建项目目录并执行脚手架
 ```bash
 # 创建一个 my-project 目录并运行 react 的脚手架
-$ cooking create my-project react
+$ tdtool create my-project react
 ```
 
 ## 开发
