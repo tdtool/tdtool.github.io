@@ -4,7 +4,7 @@ tdtool的插件本质上是提供扩展配置和依赖。不同插件扩展的�
 主题部分如下
 ```js
 /**
- * @param  {tdtool.Config} config - 该参数提供 add, remove
+ * @param  {object} config - 该参数提供 add, remove
  * @param  {*} options - 支持自定义参数
  */
 module.exports = function (config, options) {
