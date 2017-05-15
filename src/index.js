@@ -10,6 +10,7 @@ import _unset from 'lodash/unset'
 
 import loadConfig from './util/load-config'
 import loadExtend from './util/load-extend'
+import loadFileLoader from './util/load-file-loader'
 import parse from './util/parse'
 
 exports.version = require('../package.json').version
@@ -33,6 +34,7 @@ class Config {
       add: this.add,
       remove: this.remove
     })
+    loadFileLoader(this, options)
   }
 
   add = (_path, value) => {
