@@ -27,7 +27,7 @@ module.exports = async function start(options) {
       logger.fatal(`Config file ${configPath} does not exist.`)
     }
     const config = require(configPath)
-    if (is.Array) {
+    if (is.Array(config)) {
       config.forEach(item => {
         if (item.devServer) {
           serverCount++
