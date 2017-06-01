@@ -1,6 +1,6 @@
 {
   "name": "tdtool",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A modular build tool based on webpack2",
   "main": "lib/index.js",
   "bin": {
@@ -12,6 +12,7 @@
   "scripts": {
     "clean": "rimraf lib",
     "build": "npm run clean && echo Using Babel && babel --version && babel src --out-dir lib -s",
+    "pub": "npm run build && npm publish",
     "test": "npm run build && mocha --recursive 'test/**/*-spec.js'",
     "test:report": "npm run test && open mochawesome-reports/mochawesome.html",
     "coverage": "nyc --reporter=text --reporter=html --reporter=lcov mocha",

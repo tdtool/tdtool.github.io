@@ -103,7 +103,6 @@ module.exports = options => {
   if (!!options.sourceMap) {
     config.devtool = options.sourceMap === true ? (options.target === 'node' ? 'cheap-module-source-map' : 'source-map'): options.sourceMap
     if (options.target === 'node') {
-      config.plugins.SourceMapDevTool = new webpack.SourceMapDevToolPlugin({filename: '[file].map'})
       config.plugins.Banner = new webpack.BannerPlugin({
         banner: 'require("source-map-support").install();',
         raw: true,
