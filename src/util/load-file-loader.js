@@ -8,6 +8,16 @@
 const URL_LOADER_LIMIT = 10000
 
 module.exports = (config, options) => {
+  config.add('rule.tdicon', {
+    test: /tdicon\.(woff|woff2|ttf|eot|svg)($|\?)/,
+    use: [{
+      loader: 'url-loader',
+      options: {
+        limit: options && options.urlLoaderLimit ? options.urlLoaderLimit : URL_LOADER_LIMIT,
+        name: 'fonts/[name].[ext]'
+      }
+    }]
+  })
  config.add('rule.txt', {
    test: /\.txt$/,
    loader: 'raw-loader'
