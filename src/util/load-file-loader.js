@@ -22,42 +22,6 @@ module.exports = (config, options) => {
    test: /\.txt$/,
    loader: 'raw-loader'
  })
- config.add('rule.woff', {
-   test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-   loader: 'url-loader',
-   query: {
-     limit: options && options.urlLoaderLimit ? options.urlLoaderLimit : URL_LOADER_LIMIT,
-     minetype: 'application/font-woff'
-   }
- })
- config.add('rule.woff2', {
-   test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-   loader: 'url-loader',
-   query: {
-     limit: options && options.urlLoaderLimit ? options.urlLoaderLimit : URL_LOADER_LIMIT,
-     minetype: 'application/font-woff'
-   }
- })
- config.add('rule.ttf', {
-   test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-   loader: 'url-loader',
-   query: {
-     limit: options && options.urlLoaderLimit ? options.urlLoaderLimit : URL_LOADER_LIMIT,
-     minetype: 'application/octet-stream'
-   }
- })
- config.add('rule.eot', {
-   test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-   loader: 'file-loader'
- })
- config.add('rule.svg', {
-   test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-   loader: 'url-loader',
-   query: {
-     limit: options && options.urlLoaderLimit ? options.urlLoaderLimit : URL_LOADER_LIMIT,
-     minetype: 'image/svg+xml'
-   }
- })
  config.add('rule.IMAGE', {
    test: /\.(png|jpg|jpeg|gif)(\?v=\d+\.\d+\.\d+)?$/i,
    loader: 'url-loader',
