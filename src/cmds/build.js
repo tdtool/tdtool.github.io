@@ -11,8 +11,8 @@ import fs from 'fs'
 import path from 'path'
 import webpack from 'webpack'
 
-module.exports = async function build(options) {
-  await new Promise((resolve, reject) => {
+module.exports = function build(options) {
+  return new Promise((resolve, reject) => {
     let configs = options.config.split(',')
     const wbpcs = configs.map(item => {
       const configPath = path.resolve(process.cwd(), item)
