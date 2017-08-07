@@ -1,6 +1,6 @@
 {
   "name": "tdtool",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A modular build tool based on webpack2",
   "main": "lib/index.js",
   "bin": {
@@ -88,6 +88,7 @@
     "less": "^2.7.2",
     "less-loader": "^4.0.3",
     "open": "^0.0.5",
+    "optimize-css-assets-webpack-plugin": "^3.0.0",
     "postcss-loader": "^1.3.3",
     "progress-bar-webpack-plugin": "^1.9.3",
     "raw-loader": "^0.5.1",

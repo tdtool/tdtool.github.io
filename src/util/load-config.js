@@ -9,6 +9,7 @@ import path from 'path'
 import webpack from 'webpack'
 import CleanWebpackPlugin from 'clean-webpack-plugin'
 import ProgressBarPlugin from 'progress-bar-webpack-plugin'
+import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin'
 
 import is from './is'
 import loadTemplate from './load-template'
@@ -99,6 +100,10 @@ module.exports = options => {
       config.plugins.LoaderOptions = UglifyCss
     }
   }
+  // css去重
+  config.plugins.OptimizeCssAssetsPlugin = new OptimizeCssAssetsPlugin({
+    cssProcessorOptions: { discardComments: {removeAll: true } }
+  });
   // sourceMap
   if (!!options.sourceMap) {
     config.devtool = options.sourceMap === true ? (options.target === 'node' ? 'cheap-module-source-map' : 'source-map'): options.sourceMap
