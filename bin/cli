@@ -28,8 +28,11 @@ program
 
 program
   .command('init')
-  .action(function(options) {
-    run(init.bind(undefined, options))
+  .action(function() {
+    const argv = process.argv.slice(2);
+    run(init.bind(undefined, {
+      generator: argv.length >= 2 ? argv[1]: ''
+    }))
   })
 
 program.parse(process.argv);
