@@ -50,6 +50,14 @@ $ tdtool start -c tdtool.config.dev.js,tdtool.config.server.js
 
 ## 插件(开发中)
 多个插件用逗号分隔
+### init
+1. 安装全局模板
+```bash
+# 安装全局模板
+$ npm install -g @td/slush-td-template
+# 到项目目录下运行init命令
+$ tdtool init td-template
+```
 ### import
 安装脚手架
 ```bash
