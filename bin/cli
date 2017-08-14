@@ -1,0 +1,38 @@
+#!/usr/bin/env node
+
+var program = require('commander')
+var version = require('../package').version
+var run = require('../lib/util/run-command')
+var build = require('../lib/cmds/build')
+var start = require('../lib/cmds/start')
+var init = require('../lib/cmds/init')
+
+program
+  .version(version, '-v, --version');
+
+program
+  .command('build')
+  .option('-c, --config <config>', 'config file paths', 'tdtool.config.js')
+  .option('-w, --watch', 'rebuild on file change')
+  .action(function(options) {
+    run(build.bind(undefined, options));
+  });
+
+program
+  .command('start')
+  .option('-c, --config <config>', 'config file paths', 'tdtool.config.js')
+  .option('-p, --port <port>', 'webpack dev server port', 9090)
+  .action(function(options) {
+    run(start.bind(undefined, options))
+  })
+
+program
+  .command('init')
+  .action(function() {
+    const argv = process.argv.slice(2);
+    run(init.bind(undefined, {
+      generator: argv.length >= 2 ? argv[1]: ''
+    }))
+  })
+
+program.parse(process.argv);
