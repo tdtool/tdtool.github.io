@@ -5,6 +5,7 @@ var version = require('../package').version
 var run = require('../lib/util/run-command')
 var build = require('../lib/cmds/build')
 var start = require('../lib/cmds/start')
+var init = require('../lib/cmds/init')
 
 program
   .version(version, '-v, --version');
@@ -23,6 +24,12 @@ program
   .option('-p, --port <port>', 'webpack dev server port', 9090)
   .action(function(options) {
     run(start.bind(undefined, options))
+  })
+
+program
+  .command('init')
+  .action(function(options) {
+    run(init.bind(undefined, options))
   })
 
 program.parse(process.argv);
