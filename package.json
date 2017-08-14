@@ -16,8 +16,7 @@
     "test": "npm run build && mocha --recursive 'test/**/*-spec.js'",
     "test:report": "npm run test && open mochawesome-reports/mochawesome.html",
     "coverage": "nyc --reporter=text --reporter=html --reporter=lcov mocha",
-    "coverage:report": "npm run coverage && open coverage/index.html",
-    "slush": "slush"
+    "coverage:report": "npm run coverage && open coverage/index.html"
   },
   "babel": {
     "presets": [
