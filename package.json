@@ -16,7 +16,8 @@
     "test": "npm run build && mocha --recursive 'test/**/*-spec.js'",
     "test:report": "npm run test && open mochawesome-reports/mochawesome.html",
     "coverage": "nyc --reporter=text --reporter=html --reporter=lcov mocha",
-    "coverage:report": "npm run coverage && open coverage/index.html"
+    "coverage:report": "npm run coverage && open coverage/index.html",
+    "slush": "slush"
   },
   "babel": {
     "presets": [
@@ -73,7 +74,10 @@
     "mocha": "^3.3.0",
     "mochawesome": "^2.1.0",
     "nyc": "^10.3.0",
-    "rimraf": "^2.6.1"
+    "rimraf": "^2.6.1",
+    "jshint": "^2.4.1",
+    "gulp-jshint": "^1.4.0",
+    "gulp": "~3.6.2"
   },
   "dependencies": {
     "babel-core": "^6.24.1",
@@ -104,6 +108,12 @@
     "webpack-dev-middleware": "^1.10.2",
     "webpack-dev-server": "^2.4.5",
     "webpack-hot-middleware": "^2.18.0",
-    "write-file-webpack-plugin": "^4.0.2"
+    "write-file-webpack-plugin": "^4.0.2",
+    "glob": "~4.0.0",
+    "gulp-util": "^2.2.0",
+    "pretty-hrtime": "^0.2.0",
+    "archy": "^0.0.2",
+    "liftoff": "~0.10.0",
+    "chalk": "^0.4.0"
   }
 }
