@@ -102,7 +102,9 @@ module.exports = options => {
   }
   // css去重
   config.plugins.OptimizeCssAssetsPlugin = new OptimizeCssAssetsPlugin({
-    cssProcessorOptions: { discardComments: {removeAll: true } }
+    cssProcessorOptions: { discardComments: { removeAll: true, safe: true },
+    canPrint: false
+   }
   });
   // sourceMap
   if (!!options.sourceMap) {
