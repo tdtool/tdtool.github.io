@@ -33,7 +33,7 @@ module.exports = function init(options) {
 
     if (!generator) {
       log.info(chalk.red('No generator by name: "' + generatorName + '" was found!'));
-      log.info(chalk.red('Try installing it with `npm install -g @td/slush-' + generatorName + '` first.'));
+      log.info(chalk.red('Try installing it with `npm install -g slush-' + generatorName + '` first.'));
       process.exit(1);
       reject();
     }
@@ -77,20 +77,20 @@ function handleArguments(env) {
       gutil.log(env.modulePackage.version);
     }
     if (generator.pkg.version) {
-      console.log('[' + chalk.green('@td/slush-' + generator.name) + '] ' + generator.pkg.version);
+      console.log('[' + chalk.green('slush-' + generator.name) + '] ' + generator.pkg.version);
     }
     process.exit(0);
   }
 
   if (!env.modulePath) {
     gutil.log(chalk.red('No local gulp install found in'), chalk.magenta(generator.path));
-    log.info(chalk.red('This is an issue with the `@td/slush-' + generator.name + '` generator'));
+    log.info(chalk.red('This is an issue with the `slush-' + generator.name + '` generator'));
     process.exit(1);
   }
 
   if (!env.configPath) {
     log.info(chalk.red('No slushfile found'));
-    log.info(chalk.red('This is an issue with the `@td/slush-' + generator.name + '` generator'));
+    log.info(chalk.red('This is an issue with the `slush-' + generator.name + '` generator'));
     process.exit(1);
   }
 
@@ -161,7 +161,7 @@ function logEvents(name, gulpInst) {
   });
 
   gulpInst.on('task_not_found', function(err) {
-    log.info(chalk.red("Task '" + err.task + "' was not defined in `@td/slush-" + name + "` but you tried to run it."));
+    log.info(chalk.red("Task '" + err.task + "' was not defined in `slush-" + name + "` but you tried to run it."));
     process.exit(1);
   });
 
@@ -177,8 +177,7 @@ function getGenerator (name) {
 }
 
 function getAllGenerators () {
-  const modulesPaths = getModulesPaths().map( path => `${path}/@td`);
-  return findGenerators(modulesPaths);
+  return findGenerators(getModulesPaths());
 }
 
 function getModulesPaths () {
@@ -192,7 +191,7 @@ function getModulesPaths () {
     paths = paths.concat(process.env.NODE_PATH.split(sep));
   } else {
     if (process.platform === 'win32') {
-      paths.push(path.join(process.env.APPDATA, 'npm', 'node_modules/@td'));
+      paths.push(path.join(process.env.APPDATA, 'npm', 'node_modules'));
     } else {
       paths.push('/usr/lib/node_modules');
       paths.push('/usr/local/lib/node_modules');
