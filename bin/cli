@@ -6,6 +6,7 @@ var run = require('../lib/util/run-command')
 var build = require('../lib/cmds/build')
 var start = require('../lib/cmds/start')
 var init = require('../lib/cmds/init')
+var dll = require('../lib/cmds/dll')
 
 program
   .version(version, '-v, --version');
@@ -34,5 +35,10 @@ program
       generator: argv.length >= 2 ? argv[1]: ''
     }))
   })
-
+program
+  .command('dll')
+  .option('-c, --config <config>', 'config file paths', 'tdtool.dll.config.js')
+  .action(function(options) {
+    run(dll.bind(undefined, options));
+  });
 program.parse(process.argv);

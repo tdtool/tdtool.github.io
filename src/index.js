@@ -28,7 +28,7 @@ const replacePath = _path => {
 
 class Config {
   constructor(options) {
-    this.config = loadConfig(options)
+    this.config = loadConfig(options);
     // load extends
     loadExtend(options.extends, {
       add: this.add,
@@ -48,7 +48,8 @@ class Config {
   }
 
   resolve = () => {
-    return parse(this.config)
+    return parse(this.config);
   }
 }
+
 exports.Config = Config
