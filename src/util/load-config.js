@@ -14,6 +14,7 @@ import is from './is'
 import loadTemplate from './load-template'
 import loadDevServer from './load-devServer'
 import { DIST, PUBLIC_PATH } from './constant'
+import loadDllReferencePluginConfig from './load-dllReferencePlugin-config'
 
 /**
  * generate tdtool config by user options
@@ -121,6 +122,11 @@ module.exports = options => {
   }
   // ProgressBarPlugin
   config.plugins.ProgressBar = new ProgressBarPlugin()
+
+  // DllReferencePlugin
+  if (options.dll) {
+    loadDllReferencePluginConfig(config, options);
+  }
   // node
   if (options.target === 'node') {
     config.node = {
