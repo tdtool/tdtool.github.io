@@ -17,7 +17,7 @@ function logTypeError() {
 
 module.exports = (options) => {
   let config = {};
-  const compress = options.compress || false;
+  const isDebug = options.debug || false;
   const entry = options.entry;
   const _path = options.path;
   let output = {path: _path};
@@ -56,12 +56,18 @@ module.exports = (options) => {
   ]
   config.entry = entry;
   config.output = output;
-  if (compress) {
+
+  if (!isDebug) {
     config.plugins.push(new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
       }
     }))
   }
+  config.plugins.push(new webpack.DefinePlugin({
+    'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
+    'process.env.BROWSER': true,
+    __DEV__: isDebug,
+  }))
   return config;
 }
