@@ -17,6 +17,7 @@ import is from '../util/is'
 import logger from '../util/logger'
 import runNodeServer from '../util/runNodeServer'
 import WebpackDevServer from '../util/webpackDevServer'
+import happypackLoader from '../util/load-happypack';
 
 module.exports = async function start(options) {
   let configs = options.config.split(',')
@@ -51,7 +52,7 @@ module.exports = async function start(options) {
   }
   const sConfig = wbpcs.find(item => !!item.devServer)
   if (sConfig.target !== 'node') {
-    const server = new WebpackDevServer(wbpcs, options.port);
+    const server = new WebpackDevServer(wbpcs, options.port, !options.unJshappy);
     await server.run()
   } else {
     sConfig.plugins.push(new WriteFilePlugin({log: false}))
@@ -73,8 +74,13 @@ module.exports = async function start(options) {
         }
 
         config.plugins.push(new webpack.HotModuleReplacementPlugin())
-        const { query } = config.module.rules.find(x => x.loader === 'babel-loader')
-        query.plugins = ['react-hot-loader/babel'].concat(query.plugins || [])
+        let babelLoader = config.module.rules.find(x => x.loader === 'babel-loader')
+        if (babelLoader.query) {
+          babelLoader.query.plugins = ['react-hot-loader/babel'].concat(babelLoader.query.plugins || [])
+        }
+        if (!options.unJshappy) { // 多线程打包
+          happypackLoader(config, babelLoader, 'jsHappy');
+        }
       })
 
       const bundler = webpack(wbpcs)

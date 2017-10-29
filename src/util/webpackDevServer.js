@@ -11,10 +11,10 @@ import webpack from 'webpack'
 import DevServer from 'webpack-dev-server'
 import logger from './logger'
 import is from './is'
-
+import happypackLoader from './load-happypack';
 const cwd = process.cwd()
 
-function getPublicPath(config, port) {
+function getPublicPath(config, port, happypack) {
   const base = path.resolve(cwd, config.output.path);
   const parent = path.resolve(base, '..');
   const sub = parent == cwd ? '/' : base.substring(parent.length);
@@ -43,7 +43,6 @@ class WebpackDevServer {
       } else {
         config.entry = [`webpack-dev-server/client?http://localhost:${port}`, 'webpack/hot/dev-server', config.entry]
       }
-
       const rule = config.module.rules.find(x => x.loader === 'babel-loader')
       if (rule && rule.query) {
         rule.query.plugins = [ [
@@ -60,6 +59,9 @@ class WebpackDevServer {
             ],
           }
         ]].concat(rule.query.plugins || [])
+      }
+      if (happypack === true) {
+        happypackLoader(config, rule, 'jsHappy')
       }
     })
   }
