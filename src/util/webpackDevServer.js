@@ -14,7 +14,7 @@ import is from './is'
 import happypackLoader from './load-happypack';
 const cwd = process.cwd()
 
-function getPublicPath(config, port, happypack) {
+function getPublicPath(config, port) {
   const base = path.resolve(cwd, config.output.path);
   const parent = path.resolve(base, '..');
   const sub = parent == cwd ? '/' : base.substring(parent.length);
@@ -22,7 +22,7 @@ function getPublicPath(config, port, happypack) {
 }
 
 class WebpackDevServer {
-  constructor(wbpcs, port) {
+  constructor(wbpcs, port, happypack) {
     this.wbpcs = wbpcs
     this.config = wbpcs.find(x => x.target !== 'node')
     this.port = port
