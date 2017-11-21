@@ -52,7 +52,7 @@ module.exports = async function start(options) {
   }
   const sConfig = wbpcs.find(item => !!item.devServer)
   if (sConfig.target !== 'node') {
-    const server = new WebpackDevServer(wbpcs, options.port, !options.unJshappy);
+    const server = new WebpackDevServer(wbpcs, options.port, options.host, !options.unJshappy);
     await server.run()
   } else {
     sConfig.plugins.push(new WriteFilePlugin({log: false}))
