@@ -14,7 +14,8 @@ module.exports = (config, loader, happypackId) => {
   config.module.rules.splice(loaderIndex, 1);
   config.module.rules.push({
     test: loader.test,
-    loader: `HappyPack/loader?id=${happypackId}`,
+    loader: 'happypack/loader',
+    query: {id: happypackId},
     include: loader.include
   })
   delete loader.test;
