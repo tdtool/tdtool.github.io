@@ -10,6 +10,7 @@ import is from '../util/is'
 import fs from 'fs'
 import path from 'path'
 import webpack from 'webpack'
+import happypackLoader from '../util/happyloader';
 
 module.exports = function build(options) {
   return new Promise((resolve, reject) => {
@@ -40,6 +41,14 @@ module.exports = function build(options) {
       }));
       return resolve();
     };
+    if (!options.unJshappy) {
+      wbpcs.forEach(config => {
+        let babelLoader = config.module.rules.find(x => x.loader === 'babel-loader')
+        if (babelLoader) {
+          happypackLoader(config, babelLoader, 'jsHappy');
+        }
+      })
+    }
 
     if (options.watch) {
       webpack(wbpcs).watch({}, finished)

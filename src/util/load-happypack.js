@@ -26,7 +26,7 @@ module.exports = (config) => {
       config.plugins[id] = new HappyPack({
         id,
         threadPool: happyThreadPool,
-        loaders: [loader]
+        loaders: [id]
       });
     }
   });

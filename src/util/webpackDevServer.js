@@ -11,7 +11,7 @@ import webpack from 'webpack'
 import DevServer from 'webpack-dev-server'
 import logger from './logger'
 import is from './is'
-import happypackLoader from './load-happypack';
+import happypackLoader from './happyloader';
 const cwd = process.cwd();
 
 function getPublicPath(config, port, host) {
