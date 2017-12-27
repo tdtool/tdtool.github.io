@@ -17,7 +17,6 @@ import is from '../util/is'
 import logger from '../util/logger'
 import runNodeServer from '../util/runNodeServer'
 import WebpackDevServer from '../util/webpackDevServer'
-import happypackLoader from '../util/load-happypack';
 
 module.exports = async function start(options) {
   let configs = options.config.split(',')
@@ -77,9 +76,6 @@ module.exports = async function start(options) {
         let babelLoader = config.module.rules.find(x => x.loader === 'babel-loader')
         if (babelLoader.query) {
           babelLoader.query.plugins = ['react-hot-loader/babel'].concat(babelLoader.query.plugins || [])
-        }
-        if (!options.unJshappy) { // 多线程打包
-          happypackLoader(config, babelLoader, 'jsHappy');
         }
       })
 

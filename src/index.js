@@ -11,6 +11,7 @@ import _unset from 'lodash/unset'
 import loadConfig from './util/load-config'
 import loadExtend from './util/load-extend'
 import loadFileLoader from './util/load-file-loader'
+import loadHappyPack from './util/load-happypack';
 import parse from './util/parse'
 
 exports.version = require('../package.json').version
@@ -48,6 +49,7 @@ class Config {
   }
 
   resolve = () => {
+    loadHappyPack(this.config);
     return parse(this.config);
   }
 }

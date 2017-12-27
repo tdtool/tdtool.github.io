@@ -40,7 +40,8 @@ module.exports = options => {
     resolve: {
       modules: ['node_modules', path.resolve(process.cwd(), 'node_modules'), path.resolve(__dirname, '../../node_modules')]
         .concat(options.modules).filter(is.valid)
-    }
+    },
+    happypack: Object.assign({}, options.happypack)
   }
   // node env
   config.plugins.define = new webpack.DefinePlugin(is.Object(options.env) ? Object.assign({
