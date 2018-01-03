@@ -68,24 +68,30 @@ module.exports = options => {
   // chunkFilename
   config.output.chunkFilename = options.chunkFilename || '[name].chunk.js'
   // minimize
-  const UglifyJs = new webpack.optimize.UglifyJsPlugin({
+  const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
+  const os = require('os');
+  const UglifyJs = new ParallelUglifyPlugin({
+    workerCount: os.cpus().length,
+    cacheDir: '.cache/',
     sourceMap: Boolean(options.sourceMap),
-    comments: false,
-    compress: {
-      screw_ie8: true,
-      warnings: false,
-      unused: true,
-      dead_code: true,
-      collapse_vars: true,
-      reduce_vars: true
-    },
-    mangle: {
-      screw_ie8: true,
-    },
-    output: {
+    uglifyJS: {
       comments: false,
-      screw_ie8: true,
-    },
+      compress: {
+        screw_ie8: true,
+        warnings: false,
+        unused: true,
+        dead_code: true,
+        collapse_vars: true,
+        reduce_vars: true
+      },
+      mangle: {
+        screw_ie8: true
+      },
+      output: {
+        comments: false,
+        screw_ie8: true
+      }
+    }
   })
   const UglifyCss = new webpack.LoaderOptionsPlugin({minimize: true})
   if (is.Object(options.minimize)) {
