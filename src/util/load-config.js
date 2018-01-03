@@ -7,7 +7,6 @@
 
 import path from 'path'
 import webpack from 'webpack'
-import CleanWebpackPlugin from 'clean-webpack-plugin'
 import ProgressBarPlugin from 'progress-bar-webpack-plugin'
 
 import is from './is'
@@ -72,24 +71,16 @@ module.exports = options => {
   const os = require('os');
   const UglifyJs = new ParallelUglifyPlugin({
     workerCount: os.cpus().length,
-    cacheDir: '.cache/',
+    cacheDir: path.resolve(__dirname, '..', '..', '.cache'),
     sourceMap: Boolean(options.sourceMap),
     uglifyJS: {
-      comments: false,
+      ie8: true,
       compress: {
-        screw_ie8: true,
         warnings: false,
         unused: true,
         dead_code: true,
         collapse_vars: true,
         reduce_vars: true
-      },
-      mangle: {
-        screw_ie8: true
-      },
-      output: {
-        comments: false,
-        screw_ie8: true
       }
     }
   })
