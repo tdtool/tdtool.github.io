@@ -28,7 +28,7 @@ module.exports = options => {
     mode: options.mode,
     output: {
       path: path.resolve(process.cwd(), options.dist || DIST),
-      publicPath: is.nil(options.publicPath) ? PUBLIC_PATH : options.publicPath,
+      publicPath: is.nil(options.publicPath) ? undefined : options.publicPath,
       libraryTarget: options.target === 'node' ? 'commonjs2' : options.libraryTarget,
       library: options.moduleName,
       umdNamedDefine: options.libraryTarget === 'umd' || options.libraryTarget === 'amd'
