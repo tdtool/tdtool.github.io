@@ -25,6 +25,7 @@ module.exports = options => {
   const config = {
     entry: options.entry,
     target: options.target,
+    mode: options.mode,
     output: {
       path: path.resolve(process.cwd(), options.dist || DIST),
       publicPath: is.nil(options.publicPath) ? PUBLIC_PATH : options.publicPath,
@@ -40,7 +41,12 @@ module.exports = options => {
       modules: ['node_modules', path.resolve(process.cwd(), 'node_modules'), path.resolve(__dirname, '../../node_modules')]
         .concat(options.modules).filter(is.valid)
     },
-    happypack: Object.assign({}, options.happypack)
+    happypack: Object.assign({}, options.happypack),
+    optimization: {
+      minimize: is.Boolean(options.minimize) ? options.minimize : undefined,
+      splitChunks: options.optimization && options.optimization.splitChunks || undefined,
+      runtimeChunk: options.optimization && options.optimization.runtimeChunk || undefined
+    }
   }
   // node env
   config.plugins.define = new webpack.DefinePlugin(is.Object(options.env) ? Object.assign({
@@ -84,20 +90,25 @@ module.exports = options => {
       }
     }
   })
-  const UglifyCss = new webpack.LoaderOptionsPlugin({minimize: true})
-  if (is.Object(options.minimize)) {
-    if (options.minimize.js) {
-      config.plugins.UglifyJs = UglifyJs
-    }
-    if (options.minimize.css) {
-      config.plugins.LoaderOptions = UglifyCss
-    }
-  } else {
-    if (options.minimize) {
-      config.plugins.UglifyJs = UglifyJs
-      config.plugins.LoaderOptions = UglifyCss
-    }
+  // const UglifyCss = new webpack.LoaderOptionsPlugin({minimize: true})
+  // if (is.Object(options.minimize)) {
+  //   if (options.minimize.js) {
+  //     config.plugins.UglifyJs = UglifyJs
+  //   }
+  //   if (options.minimize.css) {
+  //     config.plugins.LoaderOptions = UglifyCss
+  //   }
+  // } else {
+  //   if (options.minimize) {
+  //     config.plugins.UglifyJs = UglifyJs
+  //     config.plugins.LoaderOptions = UglifyCss
+  //   }
+  // }
+
+  if (config.minimize) {
+    config.optimization.minimizer = [UglifyJs]
   }
+
   // sourceMap
   if (!!options.sourceMap) {
     config.devtool = options.sourceMap === true ? (options.target === 'node' ? 'cheap-module-source-map' : 'source-map'): options.sourceMap
@@ -110,12 +121,11 @@ module.exports = options => {
     }
   }
   // development
-  if (process.env.NODE_ENV === 'development') {
-    config.plugins.NoErrors = webpack.NoEmitOnErrorsPlugin ? new webpack.NoEmitOnErrorsPlugin() : new webpack.NoErrorsPlugin()
+  if (process.env.NODE_ENV === 'development' || config.mode === 'development') {
     config.cache = true
   }
   // development
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === 'production' || config.mode === 'production') {
     config.bail = true
   }
   // ProgressBarPlugin

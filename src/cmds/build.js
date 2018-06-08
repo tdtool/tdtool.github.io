@@ -43,6 +43,8 @@ module.exports = function build(options) {
     };
     if (!options.unJshappy) {
       wbpcs.forEach(config => {
+        delete config._extends;
+        config.mode = 'production';
         let babelLoader = config.module.rules.find(x => x.loader === 'babel-loader')
         if (babelLoader) {
           happypackLoader(config, babelLoader, 'jsHappy');

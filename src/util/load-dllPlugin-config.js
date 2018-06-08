@@ -58,16 +58,13 @@ module.exports = (options) => {
   config.output = output;
 
   if (!isDebug) {
-    config.plugins.push(new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    }))
+    config.mode = 'production';
+  } else {
+    config.mode = 'development';
   }
   config.plugins.push(new webpack.DefinePlugin({
     'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
-    'process.env.BROWSER': true,
-    __DEV__: isDebug,
+    __DEV__: isDebug
   }))
   return config;
 }

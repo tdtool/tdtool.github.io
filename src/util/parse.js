@@ -20,5 +20,8 @@ module.exports = config => ({
     rules: Object.keys(config.module.rules).map(key => config.module.rules[key])
   },
   externals: config.externals,
-  devServer: config.devServer
+  devServer: config.devServer,
+  mode: config.mode,
+  optimization: config.optimization,
+  _extends: config._extends
 })

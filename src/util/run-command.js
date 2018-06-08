@@ -5,7 +5,6 @@
  * @Last modified time: 2017-05-04 09:35:06
  */
 
-import 'babel-polyfill';
 import logger from './logger'
 
 module.exports = function run(fn, options) {
