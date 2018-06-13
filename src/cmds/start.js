@@ -51,39 +51,43 @@ module.exports = async function start(options) {
     logger.fatal(`Only one server support. Server count: ${serverCount}`)
   }
   const sConfig = wbpcs.find(item => !!item.devServer)
-  if (sConfig.target !== 'node') {
+  if (!sConfig || sConfig.target !== 'node') {
     const server = new WebpackDevServer(wbpcs, options.port, options.host, !options.unJshappy);
-    await server.run()
+    await server.run();
   } else {
     sConfig.plugins.push(new WriteFilePlugin({log: false}))
     await new Promise(resolve => {
       // 为client端增加热加载模块
-      wbpcs.filter(x => x.target !== 'node').forEach(config => {
-        if (is.Array(config.entry)) {
-          config.entry.unshift('react-hot-loader/patch', 'webpack-hot-middleware/client')
-        } else if (is.Object(config.entry)) {
-          Object.keys(config.entry).forEach(key => {
-            if (is.Array(config.entry[key])) {
-              config.entry[key].unshift('react-hot-loader/patch', 'webpack-hot-middleware/client')
-            } else {
-              config.entry[key] = ['react-hot-loader/patch', 'webpack-hot-middleware/client', config.entry[key]]
-            }
+      wbpcs.forEach(config => {
+        config.mode = config.mode || 'development';
+        if (config.target !== 'node') {
+          const whmClient = `webpack-hot-middleware/client?path=http://${options.host}:${options.port}/__webpack_hmr`;
+          if (is.Array(config.entry)) {
+            config.entry.unshift(whmClient)
+          } else if (is.Object(config.entry)) {
+            Object.keys(config.entry).forEach(key => {
+              if (is.Array(config.entry[key])) {
+                config.entry[key].unshift(whmClient)
+              } else {
+                config.entry[key] = [whmClient, config.entry[key]]
+              }
+            })
+          } else {
+            config.entry = [whmClient, config.entry]
+          }
+          config._extends.forEach(extend => {
+            const tdtoolExtend = require(`tdtool-${extend}`);
+            tdtoolExtend.cliStartCallback && tdtoolExtend.cliStartCallback(config, true);
           })
-        } else {
-          config.entry = ['react-hot-loader/patch', 'webpack-hot-middleware/client', config.entry]
+          config.plugins.push(new webpack.HotModuleReplacementPlugin())
+          const babelLoader = config.module.rules.find(x => x.loader === 'babel-loader')
+          if (!options.unJshappy && babelLoader) { // 多线程打包
+            happypackLoader(config, babelLoader, 'jsHappy');
+          }
         }
-
-        config.plugins.push(new webpack.HotModuleReplacementPlugin())
-        let babelLoader = config.module.rules.find(x => x.loader === 'babel-loader')
-        if (babelLoader && babelLoader.query) {
-          babelLoader.query.plugins = ['react-hot-loader/babel'].concat(babelLoader.query.plugins || [])
-        }
-        if (!options.unJshappy && babelLoader) { // 多线程打包
-          happypackLoader(config, babelLoader, 'jsHappy');
-        }
+        delete config._extends;
       })
-
-      const bundler = webpack(wbpcs)
+      const bundler = webpack(wbpcs);
       let wpMiddlewares = []
       let hotMiddlewares = []
       wbpcs.forEach((config, i) => {
@@ -103,6 +107,7 @@ module.exports = async function start(options) {
         const bs = Browsersync.create()
         bs.init({
           ghostMode: false,
+          port: options.port,
           proxy: {
             target: server.host,
             middleware: [...wpMiddlewares, ...hotMiddlewares],
@@ -113,7 +118,11 @@ module.exports = async function start(options) {
         }, resolve)
       }
 
-      bundler.plugin('done', stats => handleServerBundleComplete(stats))
+      bundler._pluginCompat.call({
+        name: 'done',
+        fn: stats => handleServerBundleComplete(stats),
+        names: new Set(['done'])
+      })
     })
   }
 }

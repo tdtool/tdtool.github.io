@@ -34,7 +34,7 @@ class Config {
     loadExtend(options.extends, {
       add: this.add,
       remove: this.remove
-    })
+    }, this.config)
     loadFileLoader(this, options)
   }
 

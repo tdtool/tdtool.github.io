@@ -22,7 +22,8 @@ module.exports = (config, devServer) => {
       inline: true,
       historyApiFallback: true,
       hot: true,
-      disableHostCheck: true
+      disableHostCheck: true,
+      open: true
     }
   } else {
     config.devServer = devServer
