@@ -24,7 +24,7 @@ program
   .command('start')
   .option('-c, --config <config>', 'config file paths', 'tdtool.config.js')
   .option('-p, --port <port>', 'webpack dev server port', 9090)
-  .option('-h, --host <host>', 'webpack dev server host', 'localhost')
+  .option('-h, --host <host>', 'webpack dev server host', '0.0.0.0')
   .option('--unJshappy', 'js not use happypack')
   .action(function(options) {
     run(start.bind(undefined, options))

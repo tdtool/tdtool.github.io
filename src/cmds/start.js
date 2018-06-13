@@ -61,18 +61,19 @@ module.exports = async function start(options) {
       wbpcs.forEach(config => {
         config.mode = config.mode || 'development';
         if (config.target !== 'node') {
+          const whmClient = `webpack-hot-middleware/client?path=http://${options.host}:${options.port}/__webpack_hmr`;
           if (is.Array(config.entry)) {
-            config.entry.unshift('webpack-hot-middleware/client')
+            config.entry.unshift(whmClient)
           } else if (is.Object(config.entry)) {
             Object.keys(config.entry).forEach(key => {
               if (is.Array(config.entry[key])) {
-                config.entry[key].unshift('webpack-hot-middleware/client')
+                config.entry[key].unshift(whmClient)
               } else {
-                config.entry[key] = ['webpack-hot-middleware/client', config.entry[key]]
+                config.entry[key] = [whmClient, config.entry[key]]
               }
             })
           } else {
-            config.entry = ['webpack-hot-middleware/client', config.entry]
+            config.entry = [whmClient, config.entry]
           }
           config._extends.forEach(extend => {
             const tdtoolExtend = require(`tdtool-${extend}`);
@@ -106,6 +107,7 @@ module.exports = async function start(options) {
         const bs = Browsersync.create()
         bs.init({
           ghostMode: false,
+          port: options.port,
           proxy: {
             target: server.host,
             middleware: [...wpMiddlewares, ...hotMiddlewares],
@@ -116,7 +118,11 @@ module.exports = async function start(options) {
         }, resolve)
       }
 
-      bundler.plugin('done', stats => handleServerBundleComplete(stats))
+      bundler._pluginCompat.call({
+        name: 'done',
+        fn: stats => handleServerBundleComplete(stats),
+        names: new Set(['done'])
+      })
     })
   }
 }
