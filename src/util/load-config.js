@@ -15,13 +15,35 @@ import loadDevServer from './load-devServer'
 import { DIST, PUBLIC_PATH } from './constant'
 import loadDllReferencePluginConfig from './load-dllReferencePlugin-config'
 
+
+export function getUglifyJs(options = {}) {
+  const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
+  const os = require('os');
+  const UglifyJs = new ParallelUglifyPlugin({
+    workerCount: os.cpus().length,
+    cacheDir: path.resolve(__dirname, '..', '..', '.cache'),
+    sourceMap: Boolean(options.sourceMap),
+    uglifyJS: {
+      ie8: true,
+      compress: {
+        warnings: false,
+        unused: true,
+        dead_code: true,
+        collapse_vars: true,
+        reduce_vars: true
+      }
+    }
+  })
+  return UglifyJs;
+}
+
 /**
  * generate tdtool config by user options
  *
  * @param options [user options]
  * @return config [tdtool config]
  */
-module.exports = options => {
+export default function loadConfig(options){
   const config = {
     entry: options.entry,
     target: options.target,
@@ -73,23 +95,7 @@ module.exports = options => {
   // chunkFilename
   config.output.chunkFilename = options.chunkFilename || '[name].chunk.js'
   // minimize
-  const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
-  const os = require('os');
-  const UglifyJs = new ParallelUglifyPlugin({
-    workerCount: os.cpus().length,
-    cacheDir: path.resolve(__dirname, '..', '..', '.cache'),
-    sourceMap: Boolean(options.sourceMap),
-    uglifyJS: {
-      ie8: true,
-      compress: {
-        warnings: false,
-        unused: true,
-        dead_code: true,
-        collapse_vars: true,
-        reduce_vars: true
-      }
-    }
-  })
+  const UglifyJs = getUglifyJs(options);
   // const UglifyCss = new webpack.LoaderOptionsPlugin({minimize: true})
   // if (is.Object(options.minimize)) {
   //   if (options.minimize.js) {

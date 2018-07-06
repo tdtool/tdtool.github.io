@@ -10,6 +10,7 @@ import webpack from 'webpack'
 import is from './is'
 import path from 'path'
 import ProgressBarPlugin from 'progress-bar-webpack-plugin'
+import { getUglifyJs } from './load-config'
 
 function logTypeError() {
   logger.fatal(`DllPlugin only supply an Array or Object(the value must be an Array) as entry`)
@@ -59,6 +60,9 @@ module.exports = (options) => {
 
   if (!isDebug) {
     config.mode = 'production';
+    config.optimization = config.optimization || {};
+    config.optimization.minimize = true;
+    config.optimization.minimizer = [getUglifyJs()];
   } else {
     config.mode = 'development';
   }
