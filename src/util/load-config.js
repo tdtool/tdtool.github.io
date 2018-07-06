@@ -105,7 +105,7 @@ module.exports = options => {
   //   }
   // }
 
-  if (config.minimize) {
+  if (config.optimization.minimize) {
     config.optimization.minimizer = [UglifyJs]
   }
 
