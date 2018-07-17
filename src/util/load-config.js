@@ -17,24 +17,41 @@ import loadDllReferencePluginConfig from './load-dllReferencePlugin-config'
 
 
 export function getUglifyJs(options = {}) {
-  const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
-  const os = require('os');
-  const UglifyJs = new ParallelUglifyPlugin({
-    workerCount: os.cpus().length,
-    cacheDir: path.resolve(__dirname, '..', '..', '.cache'),
-    sourceMap: Boolean(options.sourceMap),
-    uglifyJS: {
-      ie8: true,
+  // const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
+  // const os = require('os');
+  // const UglifyJs = new ParallelUglifyPlugin({
+  //   workerCount: os.cpus().length,
+  //   cacheDir: path.resolve(__dirname, '..', '..', '.cache'),
+  //   sourceMap: Boolean(options.sourceMap),
+  //   uglifyJS: {
+  //     ie8: true,
+  //     compress: {
+  //       warnings: false,
+  //       unused: true,
+  //       dead_code: true,
+  //       collapse_vars: true,
+  //       reduce_vars: true
+  //     }
+  //   }
+  // })
+  const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
+  return new UglifyJsPlugin({
+    uglifyOptions: {
+      sourceMap: Boolean(options.sourceMap),
+      comments: false,
+      warnings: false,
       compress: {
-        warnings: false,
         unused: true,
         dead_code: true,
         collapse_vars: true,
         reduce_vars: true
+      },
+      output: {
+        comments: false,
       }
     }
   })
-  return UglifyJs;
 }
 
 /**
