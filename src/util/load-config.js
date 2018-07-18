@@ -37,8 +37,10 @@ export function getUglifyJs(options = {}) {
   const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
   return new UglifyJsPlugin({
+    cache: true,
+    parallel: true,
+    sourceMap: Boolean(options.sourceMap),
     uglifyOptions: {
-      sourceMap: Boolean(options.sourceMap),
       comments: false,
       warnings: false,
       compress: {
