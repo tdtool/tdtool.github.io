@@ -3157,9 +3157,9 @@ html-minifier@^3.2.3:
     relateurl "0.2.x"
     uglify-js "3.4.x"
 
-html-webpack-plugin@jantimon/html-webpack-plugin:
+html-webpack-plugin@^3.2.0:
   version "3.2.0"
-  resolved "https://codeload.github.com/jantimon/html-webpack-plugin/tar.gz/8440e4e3af94ae5dced4901a13001c0628b9af87"
+  resolved "http://registry.npm.taobao.org/html-webpack-plugin/download/html-webpack-plugin-3.2.0.tgz#b01abbd723acaaa7b37b6af4492ebda03d9dd37b"
   dependencies:
     html-minifier "^3.2.3"
     loader-utils "^0.2.16"

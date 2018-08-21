@@ -1,6 +1,6 @@
 {
   "name": "tdtool",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A modular build tool based on webpack",
   "main": "lib/index.js",
   "bin": {
@@ -90,7 +90,7 @@
     "glob": "~4.0.0",
     "gulp-util": "^2.2.0",
     "happypack": "^5.0.0",
-    "html-webpack-plugin": "jantimon/html-webpack-plugin",
+    "html-webpack-plugin": "^3.2.0",
     "liftoff": "~0.10.0",
     "minimatch": "^3.0.4",
     "open": "^0.0.5",
