@@ -1,6 +1,6 @@
 {
   "name": "tdtool",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A modular build tool based on webpack",
   "main": "lib/index.js",
   "bin": {

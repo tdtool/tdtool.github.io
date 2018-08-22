@@ -62,7 +62,7 @@ export function getUglifyJs(options = {}) {
  * @param options [user options]
  * @return config [tdtool config]
  */
-export default function loadConfig(options){
+export default function loadConfig(options) {
   const config = {
     entry: options.entry,
     target: options.target,
@@ -93,10 +93,10 @@ export default function loadConfig(options){
   config.plugins.define = new webpack.DefinePlugin(is.Object(options.env) ? Object.assign({
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
   }, options.env) : {
-    'process.env.NODE_ENV': JSON.stringify(
-      is.nil(options.env) ? process.env.NODE_ENV : options.env
-    )
-  });
+      'process.env.NODE_ENV': JSON.stringify(
+        is.nil(options.env) ? process.env.NODE_ENV : options.env
+      )
+    });
   // template
   if (options.template !== false) {
     Object.assign(config.plugins, loadTemplate(options.template))
@@ -136,7 +136,7 @@ export default function loadConfig(options){
 
   // sourceMap
   if (!!options.sourceMap) {
-    config.devtool = options.sourceMap === true ? (options.target === 'node' ? 'cheap-module-source-map' : 'source-map'): options.sourceMap
+    config.devtool = options.sourceMap === true ? (options.target === 'node' ? 'cheap-module-source-map' : 'source-map') : options.sourceMap
     if (options.target === 'node') {
       config.plugins.Banner = new webpack.BannerPlugin({
         banner: 'require("source-map-support").install();',
@@ -180,15 +180,22 @@ export default function loadConfig(options){
   // dev server
   loadDevServer(config, options.devServer)
   // stats
-  config.stats = {
+  config.stats = {  // 打印信息控制
     colors: true,
-    reasons: process.env.NODE_ENV === 'development',
-    hash: false,
+    all: undefined,
     timings: true,
-    chunks: false,
+    publicPath: true,
+    assets: true,
+    entrypoints: true,
+    modules: false,
+    chunks: true,
+    chunkGroups: true,
     chunkModules: false,
+    children: false,
+    hash: false,
     cached: false,
-    cachedAssets: false
+    cachedAssets: false,
+    reasons: process.env.NODE_ENV === 'development'
   }
 
   return config
