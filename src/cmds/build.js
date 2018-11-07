@@ -41,10 +41,12 @@ module.exports = function build(options) {
       }));
       return resolve();
     };
+    wbpcs.forEach(config => {
+      config.mode = 'production';
+      delete config._extends;
+    })
     if (!options.unJshappy) {
       wbpcs.forEach(config => {
-        delete config._extends;
-        config.mode = 'production';
         let babelLoader = config.module.rules.find(x => x.loader === 'babel-loader')
         if (babelLoader) {
           happypackLoader(config, babelLoader, 'jsHappy');
