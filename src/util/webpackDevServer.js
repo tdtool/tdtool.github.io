@@ -68,8 +68,8 @@ class WebpackDevServer {
         if (err) {
           logger.fatal(err);
         }
-        logger.success(`The server is running at http://${this.host}:${this.port}/webpack-dev-server/`);
-        open(`http://${this.host}:${this.port}/webpack-dev-server/`);
+        logger.success(`The server is running at http://${this.host}:${this.port}/`);
+        open(`http://${this.host}:${this.port}/`);
       });    
   }
 }
