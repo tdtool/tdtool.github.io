@@ -66,29 +66,40 @@ export default function loadConfig(options) {
   const config = {
     entry: options.entry,
     target: options.target,
-    mode: options.mode,
+    mode: options.mode !== undefined ? options.mode : process.env.NODE_ENV,
     output: {
       path: path.resolve(process.cwd(), options.dist || DIST),
       publicPath: is.nil(options.publicPath) ? undefined : options.publicPath,
-      libraryTarget: options.target === 'node' ? 'commonjs2' : options.libraryTarget,
+      libraryTarget:
+        options.target === "node" ? "commonjs2" : options.libraryTarget,
       library: options.moduleName,
-      umdNamedDefine: options.libraryTarget === 'umd' || options.libraryTarget === 'amd'
+      umdNamedDefine:
+        options.libraryTarget === "umd" || options.libraryTarget === "amd"
     },
     plugins: {},
     module: {
       rules: {}
     },
     resolve: {
-      modules: ['node_modules', path.resolve(process.cwd(), 'node_modules'), path.resolve(__dirname, '../../node_modules')]
-        .concat(options.modules).filter(is.valid)
+      modules: [
+        "node_modules",
+        path.resolve(process.cwd(), "node_modules"),
+        path.resolve(__dirname, "../../node_modules")
+      ]
+        .concat(options.modules)
+        .filter(is.valid)
     },
     happypack: Object.assign({}, options.happypack),
     optimization: {
       minimize: is.Boolean(options.minimize) ? options.minimize : undefined,
-      splitChunks: options.optimization && options.optimization.splitChunks || undefined,
-      runtimeChunk: options.optimization && options.optimization.runtimeChunk || undefined
+      splitChunks:
+        (options.optimization && options.optimization.splitChunks) ||
+        undefined,
+      runtimeChunk:
+        (options.optimization && options.optimization.runtimeChunk) ||
+        undefined
     }
-  }
+  };
   // node env
   config.plugins.define = new webpack.DefinePlugin(is.Object(options.env) ? Object.assign({
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)

@@ -9,24 +9,26 @@ import is from './is'
 import path from 'path'
 import webpack from 'webpack'
 
-const cwd = process.cwd()
+// const cwd = process.cwd()
 
 module.exports = (config, devServer) => {
   if (devServer === false || is.nil(devServer)) {
     return;
   }
+  // const base = path.join(cwd, config.output.path);
+  const defaultDevCofig = {
+    contentBase: config.output.path,
+    disableHostCheck: false,
+    historyApiFallback: true,
+    hot: true,
+    inline: true,
+    quiet: true,
+    watchContentBase: true,
+  };
   if (devServer === true) {
-    const base = path.join(cwd, config.output.path);
-    config.devServer = {
-      contentBase: base,
-      inline: true,
-      historyApiFallback: true,
-      hot: true,
-      disableHostCheck: true,
-      open: true
-    }
+    config.devServer = defaultDevCofig;
   } else {
-    config.devServer = devServer
+    config.devServer = Object.assign(defaultDevCofig, devServer);
   }
   config.plugins.HotModule = new webpack.HotModuleReplacementPlugin()
 }
