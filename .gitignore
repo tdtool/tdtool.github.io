@@ -43,3 +43,5 @@ mochawesome-report
 _book
 docs
 lib
+
+package-lock.json
